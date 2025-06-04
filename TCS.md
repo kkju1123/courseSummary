@@ -177,4 +177,14 @@ if there exists a regular grammar G with **L(G ) = L**.
 
 ## R ⊆V ×(Σ∪ΣV ∪{ε})
 We are going to show that every grammar with rules generates a regular language.
+ 
+1. The proof will be **constructive**, i. e. it will tell us how to construct a regular grammar for a language that is given by such a more general grammar.
+2. Two steps:  
+    2.1 Eliminate the start variable from the right-hand side of rules.  
+    2.2 Eliminate forbidden occurrences of ε.
+
+## Start Variable in Right-Hand Side of Rules
+1. For every grammar G = ⟨V,Σ,R,S⟩ there is a grammar G′ = ⟨V′,Σ,R′,S⟩ with rules **R′⊆(V′∪Σ)∗V′(V′∪Σ)∗×(V′\{S}∪Σ)∗** suchthat L(G) = L(G′). with rulw about sineyajadaj
+2. A -> aSb to A -> aS'b. S -> Sa to S -> S'a, S -> Sa to S' -> S'a
+3. so that S no longer appears on the right hand side of any rule.
 
