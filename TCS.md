@@ -224,3 +224,44 @@ Let M be a deterministic finite automaton. The language recognized by M is defin
 When a DFA is in a specific state and reads an input symbol, we know what the next state will be. For a given input, the entire computation is determined. **ε-transitions are illegal in a Deterministic Finite Automaton (DFA).**
 ### 1. Definition (Nondeterministic Finite Automata)
 δ : **Q × (Σ ∪ {ε}) → P(Q)** is the transition function (mapping to the power set of Q)
+
+# B4 Finite Automata: Characterization
+## B4.1 - DFAs are No More Powerful than NFAs
+### 1. Every language recognized by a DFA is also recognized by an NFA.
+1. We can transform a DFA into an NFA by replacing every transition δ(q, a) = q′ with δ(q, a) = {q′}.
+### 2. Every language recognized by an NFA is also recognized by a DFA.
+Proof.  
+For every NFA M = ⟨Q,Σ,δ,q0,F⟩ we can construct a DFA M′ = ⟨Q′,Σ,δ′,q0′ ,F′⟩ with L(M) = L(M′). Here M′ is defined as follows:  
+▶ Q′ := P(Q) (the power set of Q)  
+▶ q0′ :=E(q0)  
+▶ F ′ := {Q ⊆ Q | Q ∩ F ̸= ∅}  
+▶ For all Q ∈ Q′: δ′(Q,a) := Sq ∈ Q Sq′∈δ(q,a) E(q′)  
+
+## B4.2 - Conversion from NFA to DFA
+**Example: Consider the following NFA shown in Figure 1.**
+![alt text](image-1.png)
+Transition Function of NFA
+![alt text](image-2.png)
+Result:
+![alt text](image-3.png)
+![alt text](image-4.png)
+## B4.3 - NFAs are More Compact than DFAs
+Example  
+For k ≥ 1 consider the language  
+Lk = {w ∈ {0,1}∗ | |w| ≥ k and the k-th last symbol of w is 0}.  
+The language Lk can be recognized by an NFA with k + 1 states:  
+![alt text](image-5.png)
+There is no DFA with less than 2k states that recognizes Lk
+
+## B4.3 - Finite Automata vs. Regular Languages
+### 1. Every language recognized by a DFA is regular (type 3).
+### 2. For every regular grammar G there is an NFA M with L(G) = L(M).
+**example:**  
+Let the regular grammar be:  
+V={S,A}  
+Σ={0,1}  
+R={S→0A, A→1S, A→1}  
+S: start symbol  
+Now, construct NFA:  
+![alt text](image-6.png)
+
