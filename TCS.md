@@ -265,3 +265,27 @@ S: start symbol
 Now, construct NFA:  
 ![alt text](image-6.png)
 
+# B5. Regular Languages: Closure Properties and Decidability
+
+## B5.1 Closure Properties
+How can we combine regular languages so that the result is guaranteed to be regular as well?
+### 1. concatenation
+For two languages L1 (over Σ1) and L2 (over Σ2), the concatenation of L1 and L2 is the language  
+**L1L2 ={w1w2 ∈(Σ1 ∪Σ2)∗ |w1 ∈L1,w2 ∈L2}**.  
+L1 = {Pancake, Waffle}  
+L2 = {withIceCream, withMushrooms, withCheese}  
+L1L2 = {PancakewithIceCream, PancakewithMushrooms,  
+PancakewithCheese, WafflewithIceCream, WafflewithMushrooms WafflewithCheese}
+### 2. Kleene star
+For language L define   
+▶ L0 = {ε}  
+▶ L1 = L  
+▶ Li+1 = LiL for i ∈ N>0  
+▶ Definition of (Kleene) star on L: L∗ = Si ≥0 Li .  
+▶ L = {ding, dong}  
+L∗ = {ε, ding, dong, dingding, dingdong, dongding,
+dongdong, dingdingding, dingdingdong, . . . }  
+### 3. Closure Properties
+1. Closure refers to whether a class of languages remains within the class when certain operations are applied to its members.  
+2. We say that "K is closed under an operation" if applying that operation to languages in K always gives a result that is still in K.
+### 4. Closure Properties of Regular Languages: Union
