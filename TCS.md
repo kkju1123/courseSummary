@@ -289,3 +289,33 @@ dongdong, dingdingding, dingdingdong, . . . }
 1. Closure refers to whether a class of languages remains within the class when certain operations are applied to its members.  
 2. We say that "K is closed under an operation" if applying that operation to languages in K always gives a result that is still in K.
 ### 4. Closure Properties of Regular Languages: Union
+The union of two regular languages is regular. This can be proven by **constructing an NFA that recognizes the union** (using epsilon transitions to "choose" between the two original DFAs), by combining their regular expressions with the union operator, or by appealing to the definition of regular languages and their closure properties.
+![alt text](image-7.png)
+![alt text](image-8.png)
+### 5. Closure Properties of Regular Languages: Concatenation
+![alt text](image-9.png)
+![alt text](image-10.png)
+### 6. Closure Properties of Regular Languages: Star
+![alt text](image-11.png)
+Add ε-transitions:
+from q_new to q_0  
+From every accepting state F back to q0 (to allow repeated concatenation)
+### 7. The regular languages are closed under complement.
+Proof.  
+Let L be a regular language.  
+Let M = ⟨Q,Σ,δ,q0,F⟩ be a DFA with L(M) = L. ThenM′ =⟨Q,Σ,δ,q0,**Q\F**⟩is a DFA with L(M′)=L ̄.  
+by swapping its accepting and non-accepting states  
+## B5.3 - Decidability
+### 1. Decision Problems and Decidability
+A **decision problem** is an algorithmic problem where  
+▶ for a given input  
+▶ an algorithm determines if the input has a given property   
+▶ and then produces the output “yes” or “no” accordingly.  
+A decision problem **is decidable if an algorithm for it**  
+(that always terminates and gives the correct answer) exists. 
+### 2. Word Problem
+The word problem P ∈ for regular languages is:  
+Given: regular grammar G with alphabet Σ and word w ∈ Σ∗  
+Question: Is **w ∈ L(G)**?  
+The word problem for regular languages is **decidable**.  DFAs always halt on finite inputs. Simulate M on input w. The simulation ends after |w| steps.
+
