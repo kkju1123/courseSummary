@@ -318,4 +318,131 @@ The word problem P ∈ for regular languages is:
 Given: regular grammar G with alphabet Σ and word w ∈ Σ∗  
 Question: Is **w ∈ L(G)**?  
 The word problem for regular languages is **decidable**.  DFAs always halt on finite inputs. Simulate M on input w. The simulation ends after |w| steps.
+### 3. The emptiness problem for regular languages is decidable.
+there is no path from the start state to any accept state.
+This can be checked with standard graph algorithms (e.g., breadth-first search).
+### 4. The finiteness problem for regular languages is decidable.
+Proof.  
+Construct a DFA M with L(M) = L(G).  
+We have **|L(G )| = ∞** iff in the transition diagram of M there is a **cycle** that is reachable from the start state and from which an accept state can be reached.
+This can be checked with standard graph algorithms.  
+### 5. The intersection problem for regular languages is decidable.
+Proof.  **Is L(G) ∩ L(G′) = ∅?**
+Using the closure of regular languages under intersection,  
+we can construct (e.g., by converting to DFAs, constructing the product automaton, then converting back to a grammar) a grammar G′′ with L(G′′) = L(G) ∩ L(G′)
+and use the algorithm for the emptiness problem P∅.  
+### 6. The equivalence problem for regular languages is decidable.
+**Is L(G) = L(G′)?**   
+Proof.  
+In general for languages L and L′, we have **L=L′ iff(L∩L ̄′)∪(L ̄∩L′)=∅.**  
+The regular languages are closed under intersection, union
+and complement, and we know algorithms for these operations.
+We can therefore construct a grammar for (L ∩ L ̄′) ∪ (L ̄ ∩ L′) and use the algorithm for the emptiness problem P∅.
+# B6. Regular Languages: Regular Expressions
+## B6.1 - Regular Expressions
+### 1. Definition
+Definition (Regular Expressions)  
+Regular expressions over an alphabet Σ are defined inductively: ▶ ∅ is a regular expression  
+▶ **ε is a regular expression**  
+▶ If a ∈ Σ, then a is a regular expression  
+If α and β are regular expressions, then so are:   
+▶ (**αβ**) (concatenation)  
+▶ (**α|β**) (alternative)  
+▶ (**α∗**) (Kleene closure)
+### 2. Omitting Parentheses
+omitted parentheses by convention:  
+▶ Kleene closure α∗ binds more strongly than concatenation αβ.  
+▶ Concatenation binds more strongly than alternative α|β.  
+▶ Parentheses for nested concatenations/alternatives are omitted (we can treat them as left-associative; it does not matter).  
+### 3. Language
+Definition (Language Described by a Regular Expression)  
+The language described by a regular expression γ, written **L(γ)**, is **inductively** defined as follows:  
+▶ Ifγ=∅,thenL(γ)=∅.  
+▶ Ifγ=ε,thenL(γ)={ε}.  
+▶ If γ=a with a∈Σ,thenL(γ)={a}.  
+▶ If **γ = (αβ)**, where α and β are regular expressions, then **L(γ) = L(α)L(β).**  
+▶ If **γ = (α|β)**, where α and β are regular expressions, then **L(γ) = L(α) ∪ L(β).**  
+▶ If **γ = (α∗)** where α is a regular expression, then **L(γ) = L(α)∗**.
+### Exercise
+Specify a regular expression that describes
+L = {w ∈ {0, 1}∗ | every 0 in w is followed by at least one 1}.  
+L = (1*(01+)* )*
+## B6.2 - Regular Expressions vs. Regular Languages
+### 1. Finite Languages Can Be Described By Regular Expressions
+Proof.  
+For **every word w ∈ Σ∗**, a regular expression describing  
+the language {w} can be built from **regular expressions a ∈ Σ** by using concatenations.  
+(Use ε if w = ε.)  
+For every **finite language L = {w1, w2, . . . , wn}**,
+a regular expression describing L can be built from the regular expressions for {wi } by using alternatives.
+(Use ∅ if L = ∅.)  
+### 2. Regular Expressions Not More Powerful Than NFAs
+For every language that can be described by a regular expression, there is an NFA that recognizes it.
+![alt text](image-12.png)
+### 3. DFAs Not More Powerful Than Regular Expressions
+Every language recognized by a DFA can be described by a regular expression.
+## B6.3 - Generalized Nondeterministic Finite Automata (GNFAs)
+GNFAs are like NFAs but the transition **labels can be arbitrary regular expressions over the input alphabet**.
+### 1. Definition
+Definition (Generalized Nondeterministic Finite Automata)
+A generalized nondeterministic finite automaton (**GNFA**) is a **5-tuple M = ⟨Q,Σ,δ,qs,qa⟩** where  
+▶ Q is the finite set of states  
+▶ Σ is the input alphabet  
+▶ δ : (Q \ {qa}) × (Q \ {qs}) → RΣ is the transition function (with **RΣ the set of all regular expressions over Σ**)  
+▶ qs ∈ Q is the start state  
+▶ qa ∈Q istheacceptstatewithqa ̸=qs.  
+### 2. Accepted Words
+Definition (Words Accepted by a GNFA)  
+GNFA M = ⟨Q,Σ,δ,qs,qa⟩ **accepts the word w if w=w1...wk,where each wi is in Σ∗**  
+and a sequence of states q0,q1,...,qk ∈ Q exists with  
+1 q0 =qs,  
+2 for each i, we have wi ∈ L(Ri), where Ri = δ(qi−1,qi), and  
+3 qk=qa.  
+## B6.4 DFA to GNFA ??????
+DFA to GNFA  
+![alt text](image-13.png)
+### 1. Conversion of GNFA to a Regular Expressions ？？？
+Convert(M = ⟨Q, Σ, δ, qs , qa⟩)  
+1 If |Q| = 2 return δ(qs,qa).  
+2 Select any state q ∈ Q \ {qs , qa } and let M′ =⟨Q\{q},Σ,δ′,qs,qa⟩, where for any qi ̸=qa and qj ̸=qs  
+we define  
+δ′(qi , qj ) = (γ1)(γ2)∗(γ3)|(γ4) with  
+γ1 = δ(qi,q), γ2 = δ(q,q), γ3 = δ(q,qj), γ4 = δ(qi,qj).
+3 Return Convert(M′)
+![alt text](image-14.png)
+# B7. Regular Languages: Pumping Lemma
+How can you you show that a language is not regular  
+**Pumping lemma**: use a necessary property that holds for all regular languages.  
 
+## 1. Theorem (Pumping Lemma)  
+If L is a regular language then there is a number **p ∈ N**
+(a pumping number for L) such that all words **x ∈ L with |x| ≥ p** can be **split into x = uvw** with the following properties:  
+1 |v| ≥ 1,  
+2 |uv| ≤ p, and  
+3 u**vi**w ∈ L for all i = 0,1,2,....  
+
+## 2. Proof
+1. For regular L there exists a DFA M = ⟨Q,Σ,δ,q0,E⟩ with L(M) = L. We show that **p = |Q| (the number of states in the DFA.)** has the desired properties. This number p (the number of states) is called the **pumping length**, and it’s the **key constant** in the Pumping Lemma.
+2. Consider an arbitrary x ∈ L(M) with length |x| ≥ |Q|. Including the start state, M visits |x | + 1 states while reading x . Because of |x| ≥ |Q| at least one state has to be visited twice.  
+3. Choose a split x = uvw so M is in the same state after reading u and after reading uv. Obviously, we can choose the split in a way that |v| ≥ 1 and |uv| ≤ |Q| are satisfied.  
+4. The word v corresponds to a loop in the DFA after reading u and can thus be repeated arbitrarily often. Every subsequent continuation with w ends in the same end state as reading x. Therefore uviw ∈ L(M) = L is satisfied for all i = 0,1,2,....
+## 3. Application
+**Proof of Nonregularity**  
+▶ If L is regular, then the pumping lemma holds for L.   
+▶ By contraposition: if the **PL does not hold for L**,  
+then L cannot be regular.  
+▶ That is: if there is no p ∈ N with the properties of the PL, then L cannot be regular.  
+## 4. Caveat
+Caveat:  
+The pumping lemma is a **necessary** condition for a language to be regular, but **not a sufficient** one.  
+⇝ there are languages that satisfy the pumping lemma conditions but are not regular  
+⇝ for such languages, other methods are needed to show
+that they are not regular (e.g., the Myhill-Nerode theorem)  
+## 5. Example
+The language L = {anbn | n ∈ N} is not regular.  
+
+**Proof.**  
+Assume L is regular. Then let p be a pumping number for L. The word x=apbp is in L and has length ≥ p.  
+Let x = uvw be a split with the properties of the PL.   
+Then the word x′ = uv2w is also in L. Since |uv| ≤ p, uv consists
+only of symbols a and x′ = a|u|a2|v|ap−|uv|bp = ap+|v|bp. Since|v|≥1itfollowsthatp+|v|≠ pandthusx′∈/L. This is a contradiction to the PL. ⇝ L is not regular.
