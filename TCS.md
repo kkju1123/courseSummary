@@ -447,7 +447,7 @@ Let x = uvw be a split with the properties of the PL.
 Then the word x′ = uv2w is also in L. Since |uv| ≤ p, uv consists
 only of symbols a and x′ = a|u|a2|v|ap−|uv|bp = ap+|v|bp. Since|v|≥1itfollowsthatp+|v|≠ pandthusx′∈/L. This is a contradiction to the PL. ⇝ L is not regular.
 
-# B8. Context-free Languages: ε-Rules & Chomsky Normal Form
+# B8. Context-free Languages: ε-Rules & Chomsky Normal Form ??????
 ## B8.1 Context-free Grammars
 ### 1. Definition (Context-free Grammar)  
 A context-free grammar is a **4-tuple ⟨V,Σ,P,S⟩** with  
@@ -461,4 +461,73 @@ A context-free grammar is a **4-tuple ⟨V,Σ,P,S⟩** with
 Theorem  
 For every grammar G = ⟨V,Σ,P,S⟩ there is a grammar
 G′ =⟨V′,Σ,P′,S⟩ with rules P′ ⊆ (V′∪Σ)+×(V′\{S}∪Σ)∗ such that L(G) = L(G′).  
-## start from variable right hand side od rules 
+### 3. Start from variable right hand side od rules 
+For every **type-0 language** L there is a grammar where the s**tart variable does not occur on the right-hand side** of any rule.
+Theorem  
+
+For every grammar G = ⟨V,Σ,P,S⟩ there is a grammar
+G′ =⟨V′,Σ,P′,S⟩with rules P′ ⊆(V′∪Σ)+×(V′\{S}∪Σ)∗ such that L(G) = L(G′).
+
+In the proof we constructed a suitable grammar, where the rules in P′ were not fundamentally different from the rules in P:  
+▶ for rules from V × (V ∪ Σ)+, we only introduced additional rules from V′ × (V′ ∪ Σ)+, and  
+▶ for rules from V × ε, we only introduced rules from V ′ × ε,   
+**where V ′ = V ∪ {S′} for some new variable S′ ̸∈ V** .  
+### 4. ε-Rules
+Theorem  
+For every grammar G with rules **P ⊆ V × (V ∪ Σ)∗** there is a **context-free grammar** G′ with L(G) = L(G′).  
+
+Proof.  
+Let G = ⟨V , Σ, P, S⟩ be a grammar with P ⊆ V × (V ∪ Σ)∗. Let G′ = ⟨V′,Σ,P′,S⟩ be a grammar with L(G) = L(G′) with
+P′ ⊆V′ ×((V′ \S)∪Σ)∗.
+Let Vε ={A∈V′ |A⇒∗G′ ε}. We can find this set Vε by first collecting all variables A with rule A → ε ∈ P′ and then successively adding additional variables B if there is a rule
+B → A1A2 ...Ak ∈ P′ and the variables Ai are already in the set for all 1 ≤ i ≤ k.
+
+# B9. Context-free Languages: Push-Down Automata
+## B9.1 - Push-down Automaton
+### 1. Push-down Automaton for {anbn | n ∈ N0}: Idea
+1. As long as you **read symbols a**, **push an A** on the stack.  
+2. As soon as you **read a symbol b**,**pop an A** off the stack as long as you read b.
+3. If reading the **input is finished exactly when the stack becomes empty, accept the input**.  
+4. If there is no A to pop when reading a b,or there is still an A on the stack after reading all input symbols, or if you read an a following a b then reject the input.  
+### 2. Push-down Automata: Non-determinism
+![alt text](image-15.png)
+### 3. Push-down Automata: Definition
+![alt text](image-16.png)
+![alt text](image-17.png)
+### 4. Push-down Automata: Transition Function
+![alt text](image-18.png)
+### 5. Push-down Automaton for {anbn | n ∈ N0}: Formally
+![alt text](image-19.png)
+
+![alt text](image-20.png)
+### 6. Push-down Automata: Accepted Words ？？？
+![alt text](image-21.png)
+### 7. PDAs Recognize Exactly the Context-free Languages ??? why 
+Theorem
+A language L is context-free if and only if L is recognized by a push-down automaton.
+# B10. Context-free Languages: Closure & Decidability ???
+## B10.1 - Pumping Lemma for Context-free Languages ???
+![alt text](image-22.png)
+## B10.2 - Closure Properties
+### 1. Closed under union:
+![alt text](image-23.png)
+### 2. Closed under concatenation:
+![alt text](image-24.png)
+### 3. Closed under star:
+![alt text](image-25.png)
+### 4. Not closed under intersection:
+![alt text](image-26.png)
+### 5. Not closed under complement:
+![alt text](image-27.png)
+## B10.3 - Decidability
+### 1. Word Problem
+Definition (Word Problem for Context-free Languages)  
+The word problem P∈ for context-free languages is:  
+Given: context-free grammar G with alphabet Σ and word w ∈ Σ∗  
+Question: Is w ∈ L(G)?  
+### 2. Decidability: Word Problem
+![alt text](image-28.png)
+### 3. The emptiness problem for context-free languages is decidable.
+
+# B11. Turing Machines I
+Finite automata recognize exactly the regular languages, push-down automata exactly the context-free languages. Are there automata models for context-sensitive and type-0 languages?
