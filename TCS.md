@@ -114,7 +114,7 @@ X → 0Y1 | XY
 A grammar is a **4-tuple ⟨V , Σ, R, S⟩** with:  
 1. V finite set of **variables** (nonterminal symbols)  
 2. Σ finite alphabet of **terminal symbols** with V ∩ Σ = ∅ 
-3. R ⊆ **(V∪Σ)∗V(V∪Σ)∗×(V∪Σ)∗** finite set of rules 
+3. R ⊆ **(V∪Σ)∗V(V∪Σ)∗×(V∪Σ)∗** finite set of rules (t**he left-hand side must contain at least one nonterminal.the right-hand side can be any string over terminals and nonterminals**)
 4. S ∈ V start variable
 
 ## B1.5 - Derivations
@@ -134,6 +134,9 @@ is the **set of all words** from Σ∗ that can be derived from S with **finitel
 3. if all rules are of the form **αBγ → αβγ**. with **B ∈ V and α,γ ∈ (V∪Σ)∗ and β ∈ (V∪Σ)+**
 4. Grammar is of type 2 (**context-free**) if all rules are of the form **A → w**, where **A ∈ V and w ∈ (V ∪ Σ)+**.
 5. Grammar is of type 3 (regular) if all rules are of the form A → w, where A ∈ V and w ∈ Σ ∪ Σ V .
+## Why αBγ → αβγ instead of B → β
+![alt text](<Screenshot 2025-06-14 at 23.15.54.png>)
+1. In natural language processing, some grammatical constructs depend on surrounding words. For example, subject-verb agreement in English ("she runs" vs. "they run") can be modeled more naturally with context-sensitive rules.
 
 ## B1.8 - Type 0–3 Languages
 A languageL ⊆ Σ∗ is of type0 (type1,type2,type3)  
