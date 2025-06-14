@@ -442,7 +442,23 @@ that they are not regular (e.g., the Myhill-Nerode theorem)
 The language L = {anbn | n ∈ N} is not regular.  
 
 **Proof.**  
-Assume L is regular. Then let p be a pumping number for L. The word x=apbp is in L and has length ≥ p.  
+Assume L is regular. Then let p be a pumping number for L. The word x=apbp is in L and has **length ≥ p**.  
 Let x = uvw be a split with the properties of the PL.   
 Then the word x′ = uv2w is also in L. Since |uv| ≤ p, uv consists
 only of symbols a and x′ = a|u|a2|v|ap−|uv|bp = ap+|v|bp. Since|v|≥1itfollowsthatp+|v|≠ pandthusx′∈/L. This is a contradiction to the PL. ⇝ L is not regular.
+
+# B8. Context-free Languages: ε-Rules & Chomsky Normal Form
+## B8.1 Context-free Grammars
+### 1. Definition (Context-free Grammar)  
+A context-free grammar is a **4-tuple ⟨V,Σ,P,S⟩** with  
+1. V finite set of variables,  
+2. Σ finite alphabet of terminal symbols (with V ∩ Σ = ∅),  
+3. **P⊆(V×(V∪Σ)+)∪{⟨S,ε⟩}**finite set of rules,  
+4. If S→ε ∈ P,then all other rules in **V×((V\{S})∪Σ)+**.  
+5. S ∈ V start variable.  
+6. Rule X →ε is only allowed if X = S
+### 2. Start Variable in Right-Hand Side of Rules
+Theorem  
+For every grammar G = ⟨V,Σ,P,S⟩ there is a grammar
+G′ =⟨V′,Σ,P′,S⟩ with rules P′ ⊆ (V′∪Σ)+×(V′\{S}∪Σ)∗ such that L(G) = L(G′).  
+## start from variable right hand side od rules 
