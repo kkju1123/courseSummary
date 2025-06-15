@@ -16,14 +16,15 @@ components: objects contained in tuples
 ## A2.3 - Cartesian Product
 M1 ×···× Mn = {⟨o1,...,on⟩|o1 ∈ M1,...,on ∈ Mn}.
 **n-ary relation R** is a subset over the sets M1,...,Mn = R ⊆ M1×···×Mn.
-
+example:  
+Databases: A customer-order-product relationship (ternary) in an e-commerce system: <costumer, order, product >
 ## A2.4 - Functions
 (total) function f : D → C
 maps **every** value of its domain D
 to exactly **one** value of its codomain C.
 
 partial function f : X →p Y
-f does not map x ∈ X to any value in Y, then f is undefined for x.
+f does **not map x ∈ X to any value in Y**, then f is **undefined** for x.
 
 # A3 Proofs & Proof Strategies
 ## A3.1 - Statement
@@ -133,7 +134,7 @@ is the **set of all words** from Σ∗ that can be derived from S with **finitel
 2. Grammar is of type 1 (**context-sensitive**)  
 3. if all rules are of the form **αBγ → αβγ**. with **B ∈ V and α,γ ∈ (V∪Σ)∗ and β ∈ (V∪Σ)+**
 4. Grammar is of type 2 (**context-free**) if all rules are of the form **A → w**, where **A ∈ V and w ∈ (V ∪ Σ)+**.
-5. Grammar is of type 3 (regular) if all rules are of the form A → w, where A ∈ V and w ∈ Σ ∪ Σ V .
+5. Grammar is of type 3 (**regular**) if all rules are of the form A → w, where A ∈ V and w ∈ Σ ∪ Σ V .
 ## 1. Why αBγ → αβγ instead of B → β
 ![alt text](<Screenshot 2025-06-14 at 23.15.54.png>)
 1. In **natural language** processing, some **grammatical constructs depend on surrounding words**. For example, subject-verb agreement in English ("she runs" vs. "they run") can be modeled more naturally with context-sensitive rules.
@@ -170,10 +171,9 @@ The **Pumping Lemma for Regular Languages** states that if L were regular:
 
 **Contradiction for L = `{aⁿbⁿ}`:**
 - Take `s = aᵖbᵖ` (p = pumping length)
-- `y` must be all `a`s (since `|xy| ≤ p`)
+- `y` must be all `a`s (since `|xy| ≤ p`) it forces y to be in the a's region, so when we pump y, we **disrupt the perfect balance between a's and b's** that defines the language.
 - Pumping `y` gives `aᵖ⁺ᵏbᵖ` (k ≥ 1) → more `a`s than `b`s ∉ L
 - ∴ L cannot be regular
-
 ### 3.3. It Requires a Stack (Pushdown Automaton)
 
 A **pushdown automaton (PDA)** can recognize L using a **stack**:
@@ -182,7 +182,7 @@ A **pushdown automaton (PDA)** can recognize L using a **stack**:
 3. Accept if stack empty at end
 
 This requires **memory beyond finite states**, making L **Type 2** but not Type 3.
-
+![alt text](image-31.png)
 ### 3.4 Key Differences
 
 | Property               | Regular (Type 3)       | Context-Free (Type 2)   |
@@ -512,6 +512,158 @@ Assume L is regular. Then let p be a pumping number for L. The word x=apbp is in
 Let x = uvw be a split with the properties of the PL.   
 Then the word x′ = uv2w is also in L. Since |uv| ≤ p, uv consists
 only of symbols a and x′ = a|u|a2|v|ap−|uv|bp = ap+|v|bp. Since|v|≥1itfollowsthatp+|v|≠ pandthusx′∈/L. This is a contradiction to the PL. ⇝ L is not regular.
+# B7 - The Pumping Lemma Explained
+
+## 1. Introduction
+The Pumping Lemma is a fundamental tool in formal language theory used to prove that certain languages **cannot** belong to particular language classes **(regular or context-free).**
+
+## 2. Pumping Lemma for Regular Languages (Type 3)
+
+### Statement
+For any regular language L, there exists a **constant p (the pumping length)** such that any string **s ∈ L with |s| ≥ p** can be divided into three parts **s = xyz** satisfying:
+
+1. **Length Condition**: |xy| ≤ p
+2. **Non-emptiness Condition**: |y| ≥ 1
+3. **Pumping Condition**: xyⁿz ∈ L for all n ≥ 0
+
+### Intuition
+- Any sufficiently long string in a regular language must contain a section that can be:
+  - Repeated (pumped) any number of times
+  - Removed (when n=0)
+  - While keeping the string in the language
+
+### Proof Technique (To Show Non-regularity)
+1. Assume L is regular
+2. Let p be the pumping length
+3. Find a string s ∈ L with |s| ≥ p
+4. Show that no division s = xyz satisfies all conditions
+5. Conclude L is not regular
+
+### Example: Prove L = {aⁿbⁿ | n ≥ 0} is not regular
+1. Assume L is regular with pumping length p
+2. Choose s = aᵖbᵖ
+3. For any division s = xyz with |xy| ≤ p:
+   - y must consist of only a's
+4. Pump y (n=2):
+   - xy²z = aᵖ⁺ᵏbᵖ where k = |y| ≥ 1
+   - This string has more a's than b's → ∉ L
+5. Contradiction → L is not regular
+
+## 3. Pumping Lemma for Context-Free Languages (Type 2)
+
+### Statement
+For any context-free language L, there exists a constant p such that any string s ∈ L with |s| ≥ p can be divided into five parts s = uvxyz satisfying:
+
+1. **Length Condition**: |vxy| ≤ p
+2. **Non-emptiness Condition**: |vy| ≥ 1
+3. **Pumping Condition**: uvⁿxyⁿz ∈ L for all n ≥ 0
+
+### Key Differences from Regular Version
+- Splits string into 5 parts instead of 3
+- Pumps two sections (v and y) simultaneously
+- Has a longer but similar length restriction
+
+### Example: Prove L = {aⁿbⁿcⁿ | n ≥ 0} is not context-free
+1. Assume L is context-free with pumping length p
+2. Choose s = aᵖbᵖcᵖ
+3. For any division s = uvxyz with |vxy| ≤ p:
+   - vxy cannot contain all three symbols
+4. Case 1: vxy has no c's → pumping increases a's/b's without c's
+5. Case 2: vxy has no a's → pumping increases b's/c's without a's
+6. Both cases produce strings ∉ L → Contradiction
+
+## 4. Comparison Table
+
+| Feature              | Regular Pumping Lemma | Context-Free Pumping Lemma |
+|----------------------|-----------------------|---------------------------|
+| **Division**         | xyz                   | uvxyz                     |
+| **Pumped Parts**     | y                     | v and y                   |
+| **Length Condition** | |xy| ≤ p               | |vxy| ≤ p               |
+| **Non-emptiness**    | |y| ≥ 1               | |vy| ≥ 1                |
+
+## 5. Limitations
+- The Pumping Lemma can only prove a language is **not** in a class
+- Failing the Pumping Lemma doesn't guarantee a language is in the class
+- Some non-regular languages can satisfy the conditions
+
+## 6. Applications
+1. **Compiler Design**: Prove certain syntax patterns require more than regular expressions
+2. **Language Theory**: Classify language complexity
+3. **Problem Solving**: Show problems cannot be solved with finite memory
+
+## 7. Tips for Using the Pumping Lemma
+1. Choose the simplest possible string in the language
+2. Consider all possible ways to divide the string
+3. Look for the most obvious contradictions
+4. For CFLs, consider whether v and y can be in different segments
+
+# B7 - Why the Pumping Lemma Conditions Are Necessary
+
+## The Core Requirements Explained
+
+For any regular language **L**, there exists a constant **p** (the pumping length) such that any string **s ∈ L** with **|s| ≥ p** can be divided into **s = xyz** satisfying:
+
+1. **|xy| ≤ p**  
+2. **|y| ≥ 1**  
+3. **xyⁿz ∈ L** for all **n ≥ 0**
+
+## Why These Conditions Matter
+
+### 1. The Pumping Length (p)
+- **Represents the number of states** in the minimal DFA recognizing L
+- Ensures we're examining strings long enough to force state repetition
+- **Key insight**: Any string longer than p must revisit states (Pigeonhole Principle)
+
+### 2. The Division (s = xyz)
+- **x**: The part before entering the loop
+- **y**: The repeating segment (corresponding to a cycle in the DFA)
+- **z**: The part after the loop
+
+### 3. Condition 1: |xy| ≤ p
+- **Purpose**: Guarantees the "pumpable" part (y) occurs early in the string
+- **DFA Perspective**: The first p symbols must encounter a state repetition
+- **Why?**: A DFA with p states can't process p+1 symbols without revisiting a state
+
+### 4. Condition 2: |y| ≥ 1
+- **Purpose**: Ensures there's actually something to pump
+- **DFA Perspective**: The loop must contain at least one transition
+- **Critical for**: Generating infinite strings through pumping
+
+### 5. Condition 3: xyⁿz ∈ L
+- **Purpose**: Tests language closure under repetition
+- **DFA Perspective**: 
+  - n=0: Bypassing the loop (removing y)
+  - n=1: Original string
+  - n>1: Cycling through the loop multiple times
+
+
+## Why These Conditions Work Together
+
+1. **Detects Non-Regular Patterns**:
+   - Languages requiring counting (e.g., aⁿbⁿ) fail because:
+     - Pumping disrupts the count
+     - No single loop can maintain balance between symbols
+
+2. **Matches DFA Limitations**:
+   - Finite memory can't track:
+     - Arbitrary counts
+     - Nested dependencies
+     - Cross-symbol relationships
+
+3. **Provides Constructive Proof**:
+   - Shows exactly where finite automata fail
+   - Identifies the minimum complexity needed (e.g., pushdown automata)
+
+## Practical Implications
+
+| Condition | What It Tests | Example Violation |
+|-----------|---------------|-------------------|
+| |xy| ≤ p | Locality of repetition | aⁿbⁿ (balance spans whole string) |
+| |y| ≥ 1 | Non-trivial structure | Finite languages (nothing to pump) |
+| xyⁿz ∈ L  | Closure under pumping | aⁿbⁿcⁿ (pumping breaks symbol balance) |
+
+**Key Insight**: The conditions collectively capture the fundamental limitation of finite automata - their inability to track unbounded relationships in strings.
+
 
 # B8. Context-free Languages: ε-Rules & Chomsky Normal Form ??????
 ## B8.1 Context-free Grammars
