@@ -252,7 +252,8 @@ A 4-tuple  G = ⟨V , Σ, R, S⟩ where:
    - Only \( S → ε \) allowed
 
 ### 3.Constraint
-**If \( S → ε \) exists, no \( X → yS \) allowed**.
+**If \( S → ε \) exists, no \( X → yS \) allowed**.  
+if s can derive empty, s must can not appear in the right side of the  rule
 
 
 ## B2.2 - Abstract
@@ -275,10 +276,11 @@ We are going to show that every grammar with rules generates a regular language.
     2.2 Eliminate forbidden occurrences of ε.
 
 ## B2.5 - Start Variable in Right-Hand Side of Rules
-1. For every grammar G = ⟨V,Σ,R,S⟩ there is a grammar G′ = ⟨V′,Σ,R′,S⟩ with rules **R′⊆(V′∪Σ)∗V′(V′∪Σ)∗×(V′\{S}∪Σ)∗** suchthat L(G) = L(G′). with rulw about sineyajadaj
-2. A -> aSb to A -> aS'b. S -> Sa to S -> S'a, S -> Sa to S' -> S'a
-3. so that S no longer appears on the right hand side of any rule.
-
+![alt text](image-33.png)
+![alt text](image-34.png)
+![alt text](image-35.png)
+## For every grammar G with rules R ⊆ V × (Σ ∪ ΣV ∪ {ε}) there is a regular grammar G′ with L(G) = L(G′).
+![alt text](image-36.png)
 ## B2.6 - Eliminating epsilon Rules
 ### 1. Check that the start symbol does not occur on any right-hand side
 Because if it does, and we remove the ε-production S → ε, we might **lose the ability to generate the empty word** in contexts where it was needed.
@@ -306,7 +308,7 @@ A deterministic finite automaton (DFA) is a **5-tuple M = ⟨Q,Σ,δ,q0,F⟩** w
 3. δ:Q×Σ→Q is the **transition function**  
 4. q0 ∈ Q is the start state  
 5. F ⊆ Q is the set of accept states (or final states)  
-6. a DFA accepts a word if its computation terminates in an accept state.
+6. a DFA accepts a word if its computation **terminates in an accept state**.
 ### 2. DFA: Recognized Language
 Let M be a deterministic finite automaton. The language recognized by M is defined as **L(M) = {w ∈ Σ∗ | w is accepted by M}**.
 
