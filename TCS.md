@@ -315,12 +315,14 @@ Let M be a deterministic finite automaton. The language recognized by M is defin
 ## B3.2 - NFA Nondeterministic Finite Automata
 When a DFA is in a specific state and reads an input symbol, we know what the next state will be. For a given input, the entire computation is determined. **ε-transitions are illegal in a Deterministic Finite Automaton (DFA).**
 ### 1. Definition (Nondeterministic Finite Automata)
-δ : **Q × (Σ ∪ {ε}) → P(Q)** is the transition function (mapping to the power set of Q)
+δ : **Q × (Σ ∪ {ε}) → P(Q)** is the transition function (mapping to the power set of Q， representing the possible next states)
 
 # B4 Finite Automata: Characterization
 ## B4.1 - DFAs are No More Powerful than NFAs
 ### 1. Every language recognized by a DFA is also recognized by an NFA.
-1. We can transform a DFA into an NFA by replacing every transition δ(q, a) = q′ with δ(q, a) = {q′}.
+1. A DFA is just an NFA with exactly one transition for each state and input symbol, and no ε-transitions. So, to convert a DFA to an NFA, you simply reinterpret the DFA's components in the NFA format.
+1. We can transform a DFA into an NFA by replacing every transition δ(q, a) = q′ with δ(q, a) = {q′}. And no ε-transitions 
+
 ### 2. Every language recognized by an NFA is also recognized by a DFA.
 Proof.  
 For every NFA M = ⟨Q,Σ,δ,q0,F⟩ we can construct a DFA M′ = ⟨Q′,Σ,δ′,q0′ ,F′⟩ with L(M) = L(M′). Here M′ is defined as follows:  
@@ -337,6 +339,7 @@ Transition Function of NFA
 Result:
 ![alt text](image-3.png)
 ![alt text](image-4.png)
+![alt text](image-39.png)
 ## B4.3 - NFAs are More Compact than DFAs
 Example  
 For k ≥ 1 consider the language  
@@ -344,6 +347,12 @@ Lk = {w ∈ {0,1}∗ | |w| ≥ k and the k-th last symbol of w is 0}.
 The language Lk can be recognized by an NFA with k + 1 states:  
 ![alt text](image-5.png)
 There is no DFA with less than 2k states that recognizes Lk
+### 1. ε-closure
+1. The ε-closure (epsilon-closure) is a fundamental concept in automata theory, particularly **in the context of non-deterministic finite automata (NFA) with ε-transitions (also called ε-NFAs)**.
+2. It defines the set of states **reachable from a given state (or set of states) by following zero or more ε-transitions** (transitions that do not consume any input symbol).
+3. For a set of states S, the ε-closure is the union of the ε-closures of each state in S:
+![alt text](image-38.png)
+
 
 ## B4.3 - Finite Automata vs. Regular Languages
 ### 1. Every language recognized by a DFA is regular (type 3).
