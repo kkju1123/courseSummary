@@ -501,7 +501,9 @@ For every **finite language L = {w1, w2, . . . , wn}**,
 a regular expression describing L can be built from the regular expressions for {wi } by using alternatives.
 (Use ∅ if L = ∅.)  
 ### 2. Regular Expressions Not More Powerful Than NFAs
-For every language that can be described by a regular expression, there is an NFA that recognizes it.
+For every language that can be described by a regular expression, there is an NFA that recognizes it.  
+Every regular expression can be converted into an equivalent NFA, and every NFA can be converted into an equivalent regular expression.
+
 ![alt text](image-12.png)
 ### 3. DFAs Not More Powerful Than Regular Expressions
 Every language recognized by a DFA can be described by a regular expression.
