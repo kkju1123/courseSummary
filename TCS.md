@@ -355,7 +355,10 @@ There is no DFA with less than 2k states that recognizes Lk
 
 
 ## B4.3 - Finite Automata vs. Regular Languages
-### 1. Every language recognized by a DFA is regular (type 3).
+### 1. Every language recognized by a DFA/NFA is regular (type 3).
+![alt text](image-48.png)
+![alt text](image-49.png)
+![alt text](image-50.png)
 ### 2. For every regular grammar G there is an NFA M with L(G) = L(M).
 **example:**  
 Let the regular grammar be:  
@@ -369,23 +372,13 @@ Now, construct NFA:
 # B5. Regular Languages: Closure Properties and Decidability
 
 ## B5.1 Closure Properties
-How can we combine regular languages so that the result is guaranteed to be regular as well?
+**How can we combine regular languages so that the result is guaranteed to be regular as well?**
 ### 1. concatenation
-For two languages L1 (over Σ1) and L2 (over Σ2), the concatenation of L1 and L2 is the language  
-**L1L2 ={w1w2 ∈(Σ1 ∪Σ2)∗ |w1 ∈L1,w2 ∈L2}**.  
-L1 = {Pancake, Waffle}  
-L2 = {withIceCream, withMushrooms, withCheese}  
-L1L2 = {PancakewithIceCream, PancakewithMushrooms,  
-PancakewithCheese, WafflewithIceCream, WafflewithMushrooms WafflewithCheese}
+![alt text](image-51.png)
 ### 2. Kleene star
-For language L define   
-▶ L0 = {ε}  
-▶ L1 = L  
-▶ Li+1 = LiL for i ∈ N>0  
-▶ Definition of (Kleene) star on L: L∗ = Si ≥0 Li .  
-▶ L = {ding, dong}  
-L∗ = {ε, ding, dong, dingding, dingdong, dongding,
-dongdong, dingdingding, dingdingdong, . . . }  
+![alt text](image-52.png)
+### 3. Set operations
+![alt text](image-53.png)
 ### 3. Closure Properties
 1. Closure refers to whether a class of languages remains within the class when certain operations are applied to its members.  
 2. We say that "K is closed under an operation" if applying that operation to languages in K always gives a result that is still in K.
@@ -420,18 +413,47 @@ Given: regular grammar G with alphabet Σ and word w ∈ Σ∗
 Question: Is **w ∈ L(G)**?  
 The word problem for regular languages is **decidable**.  DFAs always halt on finite inputs. Simulate M on input w. The simulation ends after |w| steps.
 ### 3. The emptiness problem for regular languages is decidable.
-there is no path from the start state to any accept state.
+there is**no path from the start state to any accept** state or accept state set is empty.
 This can be checked with standard graph algorithms (e.g., breadth-first search).
 ### 4. The finiteness problem for regular languages is decidable.
 Proof.  
 Construct a DFA M with L(M) = L(G).  
-We have **|L(G )| = ∞** iff in the transition diagram of M there is a **cycle** that is reachable from the start state and from which an accept state can be reached.
+We have **|L(G )| = ∞** iff in the transition diagram of M there is a **cycle** that is reachable from the start state and from which an accept state can be reached. 
 This can be checked with standard graph algorithms.  
+Infinite ⇔ reachable cycle + path to accepting state  
 ### 5. The intersection problem for regular languages is decidable.
 Proof.  **Is L(G) ∩ L(G′) = ∅?**
 Using the closure of regular languages under intersection,  
 we can construct (e.g., by converting to DFAs, constructing the product automaton, then converting back to a grammar) a grammar G′′ with L(G′′) = L(G) ∩ L(G′)
-and use the algorithm for the emptiness problem P∅.  
+and use the algorithm for the emptiness problem P∅. 
+
+### 5. Proof Sketch
+
+1. **Convert** G and G′ to DFAs:
+   - Let M = (Q, Σ, δ, q₀, F)
+   - Let M′ = (Q′, Σ, δ′, q′₀, F′)
+
+2. **Construct the product DFA** M″ such that:
+   - States: Q″ = Q × Q′
+   - Start state: (q₀, q′₀)
+   - Transition: δ″((q, q′), a) = (δ(q, a), δ′(q′, a))
+   - **Accepting states (for intersection):**
+     ```
+     F″ = F × F′
+     ```
+
+3. **Use emptiness check**:
+   - Perform BFS/DFS from (q₀, q′₀)
+   - Check if any state in F″ is reachable
+
+4. **Decision**:
+   - If no accepting state is reachable → L(G) ∩ L(G′) = ∅
+   - Else → L(G) ∩ L(G′) ≠ ∅
+
+### Conclusion
+Regular languages are closed under intersection, and the emptiness problem is decidable ⇒  
+**The intersection problem is decidable.**
+
 ### 6. The equivalence problem for regular languages is decidable.
 **Is L(G) = L(G′)?**   
 Proof.  
@@ -443,7 +465,8 @@ We can therefore construct a grammar for (L ∩ L ̄′) ∪ (L ̄ ∩ L′) and
 ## B6.1 - Regular Expressions
 ### 1. Definition
 Definition (Regular Expressions)  
-Regular expressions over an alphabet Σ are defined inductively: ▶ ∅ is a regular expression  
+Regular expressions **over an alphabet Σ** are defined inductively:   
+▶ ∅ is a regular expression  
 ▶ **ε is a regular expression**  
 ▶ If a ∈ Σ, then a is a regular expression  
 If α and β are regular expressions, then so are:   
@@ -458,8 +481,8 @@ omitted parentheses by convention:
 ### 3. Language
 Definition (Language Described by a Regular Expression)  
 The language described by a regular expression γ, written **L(γ)**, is **inductively** defined as follows:  
-▶ Ifγ=∅,thenL(γ)=∅.  
-▶ Ifγ=ε,thenL(γ)={ε}.  
+▶ If γ=∅,then L(γ)=∅.  
+▶ If γ=ε,then L(γ)={ε}.  
 ▶ If γ=a with a∈Σ,thenL(γ)={a}.  
 ▶ If **γ = (αβ)**, where α and β are regular expressions, then **L(γ) = L(α)L(β).**  
 ▶ If **γ = (α|β)**, where α and β are regular expressions, then **L(γ) = L(α) ∪ L(β).**  
