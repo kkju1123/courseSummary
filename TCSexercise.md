@@ -33,8 +33,16 @@ A Product Automaton is a **finite automaton constructed by combining two or more
 ## 2. NFAs for Regular Expressions
 ![alt text](image-55.png)
 ![alt text](image-56.png)
+![alt text](image-60.png)
+![alt text](image-61.png)
 ## 3. DFA, GNFA and Regular Expressions
 ![alt text](image-57.png)
 ![alt text](image-58.png)
+![alt text](image-62.png)
+![alt text](image-63.png)
+![alt text](image-64.png)
 ## 4. Regular Expressions
 ![alt text](image-59.png)
+# Exercise 4
+Chomsky Normal Form
+
