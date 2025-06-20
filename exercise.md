@@ -27,3 +27,14 @@
 ![alt text](image-47.png)
 ### 6. Product Automaton
 A Product Automaton is a **finite automaton constructed by combining two or more automata**, typically to model the concurrent behavior of the systems they represent. 
+# Exercise 3
+## 1. Product Automaton
+![alt text](image-54.png)
+## 2. NFAs for Regular Expressions
+![alt text](image-55.png)
+![alt text](image-56.png)
+## 3. DFA, GNFA and Regular Expressions
+![alt text](image-57.png)
+![alt text](image-58.png)
+## 4. Regular Expressions
+![alt text](image-59.png)

@@ -524,6 +524,40 @@ and a sequence of states q0,q1,...,qk ∈ Q exists with
 1 q0 =qs,  
 2 for each i, we have wi ∈ L(Ri), where Ri = δ(qi−1,qi), and  
 3 qk=qa.  
+
+### Example GNFA Acceptance
+
+Consider a GNFA `M = ⟨Q, Σ, δ, q_s, q_a⟩` where:
+- `Σ = {a, b}`
+- `Q = {q_s, q_1, q_a}`
+- `q_s` is the unique **start state**, and `q_a` is the unique **accept state`.
+- Transition labels (`δ`) are:
+  - `δ(q_s, q_1) = a*` — matches any number of `a`’s
+  - `δ(q_1, q_a) = b+` — matches one or more `b`’s
+
+#### Words accepted:
+To accept a word `w`, we must split `w = w_1 w_2` such that:
+1. `w_1 ∈ L(a*)` and `w_2 ∈ L(b+)`
+2. The path is `q_s --(w_1)--> q_1 --(w_2)--> q_a`
+
+#### Example accepted words:
+- `bbb` — choose `w_1 = ""`, `w_2 = "bbb"`
+- `aaabb` — choose `w_1 = "aaa"`, `w_2 = "bb"`
+- `aaaabbbbbb` — choose `w_1 = "aaaa"`, `w_2 = "bbbbbb"`
+
+#### Formal acceptance:
+A word `w` is accepted iff:
+- `w` can be split into `w_1 w_2`,
+- `w_1 ∈ L(a*)` and `w_2 ∈ L(b+)`,
+- The corresponding state sequence is `q_s, q_1, q_a`.
+
+That’s exactly what the formal definition requires:
+> Given `w = w_1 w_2`, the sequence `q_0=q_s, q_1, q_2=q_a` satisfies:
+> - `w_1 ∈ L(δ(q_s, q_1)) = L(a*)`
+> - `w_2 ∈ L(δ(q_1, q_a)) = L(b+)`
+
+✅ Hence, `M` accepts all strings consisting of some number of `a`s followed by one or more `b`s.
+
 ## B6.4 DFA to GNFA ??????
 DFA to GNFA  
 ![alt text](image-13.png)
