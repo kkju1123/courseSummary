@@ -1336,4 +1336,650 @@ The Cloud is essentially a model for delivering flexible, scalable, and cost-eff
 ### 💡 Summary
 XaaS models enable flexible, scalable, and cost-efficient IT consumption by turning traditionally on-premise IT assets into cloud-based services.
 
+## What are Subscription Models?
 
+Subscription models are pricing and service delivery approaches where users **pay a recurring fee** (e.g., monthly or yearly) to access products or services instead of purchasing them outright.
+
+### In Cloud Computing and IT Services
+- Users **subscribe** to use software, platforms, or infrastructure hosted by providers.
+- Access is usually **on-demand** and can be scaled up or down.
+- Pricing is often based on:
+  - Number of users/seats
+  - Amount of resources used (e.g., CPU hours, storage space)
+  - Features or service tiers
+
+### Advantages
+- **Lower upfront costs:** No large initial investment required.
+- **Predictable expenses:** Regular, manageable payments.
+- **Flexibility:** Easy to upgrade, downgrade, or cancel services.
+- **Continuous updates:** Subscribers receive the latest features and fixes automatically.
+
+### Common Examples
+- **Software as a Service (SaaS):** Pay monthly for access to software like Microsoft 365 or Netflix.  
+- **Platform as a Service (PaaS):** Pay for cloud platform usage to deploy applications, e.g., Heroku.  
+- **Infrastructure as a Service (IaaS):** Pay for cloud servers and storage like AWS EC2.
+
+## Categories of Cloud and Infrastructure Providers
+
+### 1. Full-Service Cloud Providers
+- Offer a **comprehensive suite of services** including:  
+  - Infrastructure as a Service (IaaS)  
+  - Platform as a Service (PaaS)  
+  - Software as a Service (SaaS)  
+- Provide integrated **networking, security, and storage tools**.  
+- Examples: Amazon Web Services (AWS), Microsoft Azure, Google Cloud Platform (GCP).
+
+### 2. Specialized Cloud Providers
+- Focus on delivering **basic and cost-effective cloud services**.  
+- Often provide simple **IaaS or bare-metal** solutions without extensive service layers.  
+- Suitable for users who need straightforward infrastructure without complex features.
+
+### 3. Webhosters
+- Provide specialized services primarily for **hosting websites and email**.  
+- Offer managed hosting, domain management, and often shared hosting environments.  
+- Examples: Bluehost, GoDaddy, HostGator.
+
+### 4. Collocation
+- Rent physical **data center space** to house and manage your own hardware.  
+- The facility provides **power, cooling, security**, and network connectivity.  
+- Users maintain full responsibility for their own equipment.
+
+### 5. On-Premise (Self-Hosted / Own Data Center)
+- Organizations manage their **own hardware and infrastructure** entirely on-site.  
+- Offers **complete control** over data, security, and infrastructure management.  
+- Requires significant investment in physical resources and IT staff.
+
+---
+
+### 💡 Summary
+From fully managed cloud services to self-hosted data centers, organizations choose providers based on control, cost, and complexity requirements.
+
+![alt text](image-66.png)
+
+## How a Company Uses AWS
+
+Companies use AWS to build, deploy, and scale their IT infrastructure and applications without investing heavily in physical hardware.
+
+### Typical Use Cases
+
+- **Website Hosting:** Run scalable websites using AWS EC2, S3, and CloudFront.  
+- **Application Deployment:** Use AWS Elastic Beanstalk or Kubernetes on AWS to deploy apps.  
+- **Data Storage & Backup:** Store data securely with S3 and Glacier.  
+- **Databases:** Use managed databases like Amazon RDS or DynamoDB.  
+- **Analytics & Machine Learning:** Process big data with AWS EMR and use AI services like SageMaker.  
+- **Disaster Recovery:** Implement backup and failover using AWS’s global data centers.
+
+### Example: E-Commerce Company Using AWS
+
+1. **Infrastructure:**  
+   - Use **EC2 instances** to run web servers and application servers.  
+   - Store product images and static content in **S3**.  
+   - Use **RDS (Relational Database Service)** for managing customer and order data.
+
+2. **Scalability:**  
+   - Implement **Auto Scaling Groups** to handle traffic spikes during sales events.  
+   - Use **Elastic Load Balancer (ELB)** to distribute traffic evenly across servers.
+
+3. **Security:**  
+   - Secure servers with **Security Groups** (firewall rules).  
+   - Encrypt data at rest with AWS Key Management Service (KMS).
+
+4. **Monitoring:**  
+   - Use **CloudWatch** to monitor application performance and set alarms.  
+   - Log application and infrastructure events for audit and troubleshooting.
+
+5. **Cost Management:**  
+   - Take advantage of **pay-as-you-go** pricing to optimize costs.  
+   - Use **AWS Cost Explorer** to track and forecast expenses.
+
+---
+
+### Summary
+By leveraging AWS, companies can quickly launch services, scale with demand, improve reliability, and reduce upfront capital expenses.
+
+## From Cloud to the Edge: Why It Matters
+
+- **Rapid Growth of IoT (Internet of Things)**  
+  The increasing number of connected devices generates vast amounts of data requiring real-time processing.
+
+- **Limitations of Traditional Cloud Models**  
+  Centralized cloud data centers may introduce high latency and bandwidth bottlenecks, unsuitable for time-sensitive applications.
+
+- **Emergence of Distributed Paradigms**  
+  Edge computing moves data processing closer to the data sources (e.g., sensors, devices), reducing latency and network load.
+
+---
+
+### Why This Shift Is Important
+- Enables **real-time decision making** for applications like autonomous vehicles, industrial automation, and augmented reality.
+- Reduces **bandwidth costs** by processing data locally instead of sending everything to the cloud.
+- Improves **reliability** by allowing devices to operate even with intermittent cloud connectivity.
+
+## Edge Computing
+
+Edge computing brings computation and data storage **closer to the sources of data** (e.g., IoT devices, sensors).
+
+### Advantages of Edge Computing
+- **Minimization of latency:** Faster response times by processing data near its source.
+- **Enabling real-time monitoring and services:** Supports applications that require immediate feedback.
+- **Bypassing bandwidth restrictions:** Reduces the amount of data sent over the network.
+- **Reduction of network costs:** Less data transmission lowers operational expenses.
+- **Improved controllability of confidential data:** Sensitive data can be processed locally without exposing it to the cloud.
+- **Scalability:** Easily scales by distributing processing across many edge devices.
+
+---
+
+### Example Use Cases
+- Autonomous vehicles processing sensor data on the vehicle itself.
+- Smart factories with local processing for machinery control.
+- Real-time video analytics on surveillance cameras.
+
+## Fog Computing
+
+Fog computing acts as an **intermediary layer** between the cloud and edge devices, providing distributed computing and storage closer to end-users.
+
+### Characteristics
+- Offers **more compute resources** compared to individual edge nodes.
+- Can **coordinate and steer decisions** across groups of edge devices.
+- Helps reduce latency and bandwidth usage by processing data locally before sending to the cloud.
+
+### Example
+In a smart city scenario, **fog computing nodes** could be placed in city districts to locally manage and control traffic flow, enabling real-time decisions without relying on a distant cloud.
+
+---
+
+### Key Benefits
+- Localized processing for improved responsiveness.
+- Scalability by managing clusters of edge devices.
+- Reduced network congestion by filtering data upstream.
+
+![alt text](image-67.png)
+
+## How to Integrate On-Premises Infrastructure (Private Clouds) with Public Cloud Services
+
+Integration of private clouds with public cloud services involves connecting your internal data centers with cloud platforms to enable seamless resource sharing and management.
+
+### Key Steps for Integration
+
+1. **Assess Requirements and Workloads**  
+   - Identify which applications or workloads are suitable for the public cloud (e.g., bursting, backup, disaster recovery).  
+   - Determine security, compliance, and latency needs.
+
+2. **Establish Network Connectivity**  
+   - Use **VPNs (Virtual Private Networks)** or **Dedicated Connections** like AWS Direct Connect, Azure ExpressRoute, or Google Cloud Interconnect for secure, high-speed communication between environments.  
+   - Ensure reliable and low-latency links.
+
+3. **Implement Hybrid Cloud Management Tools**  
+   - Use cloud management platforms (CMPs) or tools like **VMware vRealize**, **Microsoft Azure Arc**, or **Google Anthos** for unified resource and policy management across private and public clouds.
+
+4. **Deploy Cloud-Compatible Infrastructure**  
+   - Use virtualization and containerization technologies that are portable across environments (e.g., VMware, Kubernetes).  
+   - Prepare your on-premises infrastructure to be cloud-ready with APIs and automation.
+
+5. **Set Up Identity and Access Management (IAM)**  
+   - Integrate on-premises directory services (like Active Directory) with cloud IAM for unified authentication and authorization.  
+   - Implement Single Sign-On (SSO) and role-based access control (RBAC).
+
+6. **Enable Data Synchronization and Backup**  
+   - Use data replication and backup solutions to keep data consistent between private and public clouds.  
+   - Consider tools like AWS Storage Gateway, Azure Backup, or third-party solutions.
+
+7. **Monitor and Secure Hybrid Environment**  
+   - Deploy centralized monitoring and logging solutions (e.g., CloudWatch, Azure Monitor).  
+   - Apply security best practices including encryption, firewalls, and compliance monitoring.
+
+---
+
+### Summary
+
+Successful integration requires planning across networking, management, security, and data layers to ensure seamless, secure, and efficient hybrid cloud operations.
+
+## Multi-Cloud Architectures
+
+Multi-cloud architectures involve the use of **multiple public cloud providers** (e.g., AWS, Microsoft Azure, Google Cloud Platform) within a single organization’s IT environment.
+
+### Benefits
+- **Avoid Vendor Lock-in:**  
+  Reduces dependency on a single cloud provider, allowing flexibility to switch or distribute workloads.
+- **Increased Redundancy and Resiliency:**  
+  Improves availability by spreading workloads across different providers and geographic regions.
+- **Best-of-Breed Services:**  
+  Enables selection of the most suitable or advanced services from each provider.
+
+### Challenges
+- **Interoperability and Unified Management:**  
+  Difficult to integrate and manage resources across diverse cloud platforms with different APIs and tools.
+- **Consistent Security Policies and Data Governance:**  
+  Ensuring uniform security, compliance, and governance across clouds can be complex.
+- **Increased Operational Complexity:**  
+  Requires advanced skills and tools to handle deployment, monitoring, and troubleshooting in multiple environments.
+
+---
+
+### Summary
+Multi-cloud strategies offer flexibility and resilience but come with added complexity requiring careful planning and sophisticated management solutions.
+
+## Microservices Architecture
+
+**Microservices architecture** is an architectural style that structures an application as a collection of small, autonomous services.
+
+### Key Characteristics
+- **Service per Business Capability**  
+  Each microservice encapsulates a single, well-defined business capability (e.g., user management, order processing, payment).
+  
+- **Lightweight Communication**  
+  Services communicate with one another using lightweight protocols, typically **REST** or **gRPC**, often exchanging data as JSON or Protobuf.
+  
+- **Decentralized Data Management**  
+  Every microservice can manage its own database, allowing data storage to fit the service's requirements and avoid a single point of contention.
+  
+- **Independent Deployment and Scaling**  
+  Microservices can be deployed, updated, and scaled individually without impacting other services, enabling continuous delivery and scalability.
+
+### Benefits
+- Greater agility and faster release cycles
+- Easier scalability of specific components
+- Improved fault isolation (a failure in one service doesn’t bring down the whole system)
+
+### Challenges
+- Increased complexity in service communication and coordination
+- Requires strong DevOps practices and automation
+- Monitoring, logging, and debugging can be more difficult across distributed components
+
+![alt text](image-68.png)
+![alt text](image-69.png)
+
+## Separation of Stateful and Stateless Services
+
+When designing distributed systems or cloud architectures, it’s important to separate **stateless** and **stateful** services because they scale and behave differently.
+
+---
+
+### ⚡ Stateless Services
+
+**Characteristics:**
+- Do **not** store any persistent data between requests.
+- Can be **scaled dynamically** — restarted or moved without losing information.
+- Health checks, restarts, or autoscaling do not impact correctness.
+
+**Examples:**
+- Web front-ends (e.g. Nginx)
+- Compute-intensive or logic-only microservices (e.g. image-processing API)
+- Application servers handling HTTP requests
+
+---
+
+### 🗄️ Stateful Services
+
+**Characteristics:**
+- Maintain data or session information that must persist across restarts.
+- Require **persistent memory** or stable data storage.
+- Have more complex migration and failover strategies.
+
+**Examples:**
+- Databases (e.g. MySQL, PostgreSQL)
+- Caches or queues with durable data (e.g. Redis with persistence, RabbitMQ)
+- User session stores
+
+---
+
+### 🎯 Why Separate Them?
+
+- Stateless services can scale elastically to meet demand.
+- Stateful services require durability and careful replication strategies.
+- Separation simplifies architecture, improves scalability, and enhances fault tolerance.
+
+![alt text](image-70.png)
+![alt text](image-71.png)
+
+## Container Orchestration
+
+Container orchestration simplifies the deployment and management of containers across a distributed environment. Its main features and benefits include:
+
+---
+
+### 🚀 Automatic Placement of Containers
+- Optimal utilization of resources
+- Efficient container distribution across hosts
+- Avoidance of overloads and hotspots
+
+---
+
+### ⚖️ Scaling and Load Distribution
+- Add or remove container instances on demand
+- Evenly distribute workload across containers
+- Maintain performance during peak loads
+
+---
+
+### 🛠️ Self-Healing and Fail-Safety
+- Automatic restart of failed containers
+- Migrate containers if a host fails
+- Achieve higher service availability and uptime
+
+---
+
+### 💡 Resource Management
+- Prevent resource over-allocation or contention
+- Optimize CPU, memory, and network usage
+- Improve overall application and cluster performance
+
+## Kubernetes
+
+Kubernetes (often abbreviated as **K8s**) is a platform for:
+- Automating the **deployment**, **scaling**, and **management** of container-based applications.
+- Running workloads reliably across a **distributed environment**.
+
+---
+
+### ✨ Key Highlights
+- **Originally developed by Google** and donated to the Cloud Native Computing Foundation (CNCF).
+- **Open-source** and considered the **market leader** in container orchestration.
+- Deployable on **public clouds** (e.g. AWS, Azure, GCP) as well as **on-premises** data centers.
+
+## What are Container-Based Applications?
+
+**Container-based applications** are software solutions that are packaged and deployed inside **containers**. Containers bundle the application along with its:
+- Runtime
+- Libraries
+- Dependencies
+- Configuration files
+
+so that the app can run **consistently across different environments** (e.g. laptops, test servers, and production clouds) without compatibility issues.
+
+---
+
+### 🎯 Key Characteristics
+- **Portable**: Run the same container image on any platform that supports containers.
+- **Lightweight**: Containers share the host OS kernel, making them more resource-efficient than traditional virtual machines.
+- **Isolated**: Containers run in their own sandbox, ensuring the app is isolated from other containers.
+- **Scalable**: Easily replicated and managed for rapid horizontal scaling.
+
+---
+
+### 🔧 Example Technologies
+- **Docker** for creating container images.
+- **Kubernetes** for orchestrating containerized applications at scale.
+
+## Deployment and Self-Healing in Kubernetes
+
+A **Kubernetes Deployment** describes the *desired state* of your application:
+- Number of **replicas** (copies of the app container)
+- **Container image** version
+- Configuration (ports, environment variables, etc.)
+
+Kubernetes then **ensures** this desired state is **continuously maintained**.  
+If a container crashes or a node fails, Kubernetes automatically:
+- **Restarts** failed containers
+- **Reschedules** containers on healthy nodes
+- Keeps the number of replicas at the desired level (self-healing)
+
+---
+
+### 🧑‍💻 Example YAML Deployment
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-webapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-webapp
+  template:
+    metadata:
+      labels:
+        app: my-webapp
+    spec:
+      containers:
+      - name: webapp-container
+        image: my-webapp:1.0
+        ports:
+        - containerPort: 80
+```
+
+## Liveness Probe in Kubernetes
+
+A **liveness probe** checks whether a container is still **alive** and functioning correctly.  
+If the probe fails, Kubernetes **automatically restarts** the container.
+
+### 🧪 Typical Probe Methods:
+- **HTTP GET** — Requests a specific HTTP endpoint (e.g. `/health`) and expects a success status code.
+- **TCP Socket** — Checks if a port is open and accepting connections.
+- **Command Probe** — Runs a custom command inside the container and expects a successful exit code (`0`).
+
+---
+
+### 🧑‍💻 Example YAML Snippet
+Here’s a Deployment with an HTTP GET liveness probe:
+
+```yaml
+containers:
+- name: my-webapp
+  image: my-webapp:1.0
+  livenessProbe:
+    httpGet:
+      path: /health
+      port: 80
+    initialDelaySeconds: 10
+    periodSeconds: 5
+```
+## Volumes: Storage Management in Kubernetes
+
+A **volume** in Kubernetes provides **persistent storage** that containers in a Pod can use.  
+Without a volume, container files are **ephemeral** — they disappear when the container restarts.
+
+---
+
+### 🧑‍💻 Example: `hostPath` Volume
+A `hostPath` volume mounts a **directory on the node's filesystem** into the Pod, ensuring data is preserved across restarts of containers or Pods on the same node.
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app
+spec:
+  containers:
+  - name: app-container
+    image: my-app:1.0
+    volumeMounts:
+    - name: app-storage
+      mountPath: /data
+  volumes:
+  - name: app-storage
+    hostPath:
+      path: /var/lib/my-app-data
+      type: DirectoryOrCreate
+```
+## Synchronize Data Between Nodes in Kubernetes
+
+Kubernetes by itself **does not provide built-in distributed storage** across all nodes.  
+You must use **external persistent volumes** or set up a distributed file system.
+
+---
+
+### 🎯 Common Approaches
+
+1. **PersistentVolumes backed by Network Storage**  
+   - Examples: AWS EBS, NFS, Azure Disk  
+   - ✅ Data is available regardless of which node your Pod runs on.  
+   - ❌ Higher latency and often single-instance attachment.
+
+2. **Distributed File Systems**  
+   - Examples: Ceph, GlusterFS  
+   - ✅ Multi-node data sharing with replication.  
+   - ❌ Added complexity, potential inconsistencies, and increased latency.
+
+---
+
+### ⚠️ Why is This Challenging?
+Kubernetes Pods can move between nodes at any time.  
+**Local disks (`hostPath`) won’t work** if a Pod is rescheduled to another node.
+
+That’s why:
+- Kubernetes integrates with **external storage classes**.
+- Or you deploy a **distributed file system** inside the cluster itself.
+
+---
+
+> 💡 Choose the solution carefully:
+> - **External Cloud Storage:** Simple setup, but slower.
+> - **Distributed Filesystem:** Scalable, but more complex.
+
+## Replication of Stateful Services in Kubernetes
+
+---
+
+### 🎯 The Challenge
+A database like **PostgreSQL** is a **single point of failure** if deployed as a single Pod.
+
+---
+
+### ✅ Kubernetes Can Help With:
+- **StatefulSets**:  
+  - Stable network identities for each Pod.  
+  - PersistentVolumes for stable storage across restarts.
+- **Affinity Rules**:  
+  - Run Pods on specific nodes for performance or locality.
+
+---
+
+### ⚠️ However:
+- **Data replication & consistency** is **not managed by Kubernetes**.  
+- Databases must handle this themselves (e.g. using PostgreSQL streaming replication or Patroni).
+
+---
+
+### 🧠 Common Approach
+> Run the database as a **distributed system**:
+> - Deploy **PostgreSQL with built-in replication**.
+> - Or use managed services like **Amazon RDS** or **Cloud SQL** for automatic failover.
+
+---
+
+> 💡 Summary:
+> Kubernetes handles Pod lifecycle and stable storage.  
+> Application-level replication and failover logic is up to the database or distributed data store.
+
+# 3. NoSQL
+
+## What is NoSQL?
+
+**NoSQL** = “Not only SQL” — a class of databases that do **not follow the traditional relational (SQL) model**.
+
+---
+
+### ✨ Key Characteristics
+- **Non-relational**: Uses data models like:
+  - Document
+  - Key-Value
+  - Column-family
+  - Graph
+- **No fixed schema**:
+  - Dynamically add new attributes to individual records. You do not predefine a strict table structure (as you do in a relational database with columns and types).
+- **Distributed by design**:
+  - Automatic data **partitioning** (sharding) and **replication**.
+- **Horizontal scalability**:
+  - Easy to add more machines to scale up for **very large data volumes**.
+- **Simple interface**:
+  - Basic operations (`GET`, `PUT`, `DELETE`), often with **no SQL joins**.
+- **Relaxed consistency**:
+  - Prioritizes **availability** and **partition tolerance**:
+    - Favors **BASE** properties:
+      - **B**asically Available
+      - **S**oft-state
+      - **E**ventual consistency
+- **No full ACID** transactions as in relational DBs.
+
+---
+
+### 🎯 Why use NoSQL?
+- High write and read throughput
+- Flexible data modeling
+- Suitable for big data, real-time analytics, and distributed apps
+
+### 🔧 Example: Basic NoSQL Operations with Redis
+
+```bash
+# SET a key
+SET user:1001 "Alice"
+
+# GET the key's value
+GET user:1001
+# → "Alice"
+
+# DELETE the key
+DEL user:1001
+# → (integer) 1
+```
+### 🔄 Relaxed Consistency (BASE)
+
+Traditional relational databases follow **ACID** properties:
+- **Atomicity**
+- **Consistency**
+- **Isolation**
+- **Durability**
+
+In contrast, many distributed NoSQL systems use **BASE**:
+- **Basically Available** — The system responds most of the time.
+- **Soft-state** — The state of the system can change over time, even without input.
+- **Eventually consistent** — Updates will propagate, so all replicas become consistent **over time**.
+
+#### 🔍 Example:
+Imagine a global e-commerce app using a NoSQL store:
+- A user updates their profile in one region.
+- Another region might show the **old version** of the profile temporarily.
+- After a short delay (e.g. a few seconds), all nodes sync — making data eventually consistent.
+
+> ✅ This improves **scalability** and **availability**, at the cost of **immediate consistency**.
+
+## 🤔 How to Choose Between ACID and BASE?
+
+Your choice depends on **your application’s requirements**:
+
+| Factor                 | ACID (e.g. traditional SQL DBs)            | BASE (e.g. NoSQL DBs)                |
+|-------------------------|-------------------------------------------|-------------------------------------|
+| **Data Consistency**    | Strict and immediate consistency.         | Relaxed; eventually consistent.     |
+| **Scalability**         | Vertical scaling (scaling up a single DB).| Horizontal scaling (scaling out).   |
+| **Latency Tolerance**   | Requires low-latency networks.            | Tolerant of network delays.         |
+| **Workload Type**       | Financial transactions, banking, HR.      | Social media, IoT, catalogs.        |
+| **Schema Flexibility**  | Fixed schema; strict types.               | Flexible, schema-less.              |
+| **Failure Handling**    | Rollbacks on errors.                     | Retries or accepts temporary inconsistency. |
+| **Example Use Cases**   | Online banking, booking systems.          | Product listings, event streams.    |
+
+> 🎯 **Rule of thumb**:
+> - Choose **ACID** if **data correctness and consistency** is paramount.
+> - Choose **BASE** if you need **massive scale, flexibility, and can tolerate temporary inconsistencies**.
+
+## 🗄️ NoSQL Systems
+
+NoSQL systems provide alternative data models to traditional relational databases. They are generally:
+
+- **No fixed schema** (schema-less or schema-flexible)
+- **Distributed by design** (supporting sharding and replication)
+- **Simple interface** (basic operations like GET, PUT, DELETE)
+- **Relaxed consistency** (often BASE instead of strict ACID)
+
+---
+
+### 🔑 Key-Value Stores
+
+**Description**:  
+Store data as simple key-value pairs.  
+Each value can be any data format (e.g. string, JSON, binary).
+
+**Example**:
+```bash
+GET user:123
+# → { "name": "Alice", "age": 30 }
+```
+
+**When to use**  
+Caching, User sessions, Lightweight lookups  
+**Popular DBs**  
+Redis Amazon DynamoDB  
+
+### Wide-Column Stores
