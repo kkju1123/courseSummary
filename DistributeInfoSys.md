@@ -531,31 +531,31 @@ These axes reflect the increasing complexity and richness of modern distributed 
 
 ✅ **Use cases**: Suitable for personal use, small tools, or prototype software where scalability and distributed features are not a concern.
 
-# Two-Tier Client/Server Architectures
+## Two-Tier Client/Server Architectures
 
-## Definition
+### Definition
 - In two-tier architecture, the system is split into two parts:
   1. **Client** (front-end): User interface and some business logic
   2. **Server** (back-end): Database management and sometimes additional business logic
 - The client communicates directly with the server over a network.
 
-## Characteristics
+### Characteristics
 - The client handles the presentation layer (UI) and possibly some processing.
 - The server manages data storage and query processing.
 - Communication is usually done via database queries or API calls.
 - Common in desktop applications connected to a centralized database.
 
-## Advantages
+### Advantages
 - Simpler than multi-tier architectures.
 - Clear separation between user interface and data storage.
 - Easier to develop and maintain than monolithic (one-tier) systems.
 
-## Disadvantages
+### Disadvantages
 - Limited scalability: The server can become a bottleneck with many clients.
 - Business logic may be duplicated or split between client and server, complicating maintenance.
 - Tight coupling between client and server.
 
-## Examples
+### Examples
 - A desktop application (e.g., a bank teller app) connecting directly to a database server (e.g., Oracle DB).
 - Classic client-server database applications using **ODBC/JDBC**.
 - Early email clients communicating directly with an email server (e.g., Microsoft Outlook with Exchange Server).
@@ -563,3 +563,368 @@ These axes reflect the increasing complexity and richness of modern distributed 
 ---
 
 ✅ **Summary**: Two-tier architecture moves the data management to a separate server but keeps the client relatively “thick” with UI and some logic.
+
+## Three-Tier Client/Server Architecture
+
+A **three-tier client/server architecture** is a software design pattern that splits an application into three logical layers:
+
+1. **Presentation Tier (Client)**  
+2. **Application Tier (Business Logic)**  
+3. **Data Tier (Database)**
+
+---
+
+
+### 🧑‍💻 1. Presentation Tier (Client)
+- **Purpose:** User interface & interaction.
+- **Examples:**  
+  - Web browsers (e.g. Chrome, Firefox)  
+  - Mobile apps (e.g. iOS, Android apps)  
+  - Desktop clients (e.g. Electron apps)
+
+---
+
+### ⚙️ 2. Application Tier (Business Logic)
+- **Purpose:** Application logic, request processing, enforcing business rules.
+- **Examples:**  
+  - Java Spring Boot REST API  
+  - ASP.NET Core WebAPI  
+  - Python Flask or Django server
+
+---
+
+### 🗄️ 3. Data Tier (Database)
+- **Purpose:** Persistent data storage and retrieval.
+- **Examples:**  
+  - Relational Databases: MySQL, PostgreSQL  
+  - NoSQL Databases: MongoDB, Redis  
+  - Cloud databases: Amazon RDS, Google Cloud SQL
+
+---
+## 🌐 Real-World Example: Online Shopping Web App
+
+Imagine you’re building an **online shopping website** (e.g. Amazon, Etsy):
+
+| Tier             | What it Does                                                | Example Technologies |
+|------------------|------------------------------------------------------------|----------------------|
+| 🎨 Presentation  | Renders the shopping interface for customers.              | React.js for the website UI; native iOS app. |
+| ⚙️ Application   | Handles business logic like searching products, calculating discounts, placing orders. | Java Spring Boot, Node.js with Express, ASP.NET Core. |
+| 🗄️ Data          | Stores product data, order histories, and customer accounts. | MySQL database, MongoDB, or Amazon DynamoDB. |
+
+---
+
+### 📜 Workflow Example:
+1. **Customer Browses Products (UI)**  
+   - The **Presentation Tier** displays a list of products using data from the Application Tier.
+
+2. **Application Tier Fetches Products**  
+   - The **Application Tier** sends a query to the **Data Tier** (e.g. SQL query to MySQL) to retrieve product data.
+
+3. **Data Tier Responds**  
+   - The **Data Tier** returns the products as a list to the Application Tier.
+
+4. **Application Tier Formats Response**  
+   - The Application Tier processes the list (e.g. sorts by price, filters promotions) and returns it to the Presentation Tier as JSON.
+
+5. **User Places Order**  
+   - The UI sends the order to the Application Tier, which validates the order and writes the new order record to the Data Tier.
+
+---
+
+### 📡 Example Tech Stack:
+```text
+• Presentation Tier — React.js + TailwindCSS
+• Application Tier — Spring Boot REST API
+• Data Tier — MySQL on AWS RDS
+
+## Multi-Tier Client/Server Architecture
+
+**Multi-Tier Client/Server Architecture** is an **extension of the three-tier model** where the application is split into **more than three logical tiers or layers**, allowing even more fine-grained separation of responsibilities.  
+This design is also sometimes called **N-Tier Architecture**.
+```
+---
+
+### 📜 What is Multi-Tier Architecture?
+- A software design where different components or services of an application are divided into multiple independent layers or tiers.
+- Each **tier** is responsible for one specific part of the system (e.g. user interface, business logic, data management, authentication, caching, etc.).
+- Tiers can run on separate physical or virtual machines to improve scalability and fault tolerance.
+
+---
+
+### 🧠 Common Tiers
+| Tier             | Role & Responsibility                                              | Example Technologies           |
+|------------------|----------------------------------------------------------------------|---------------------------------|
+| 🎨 Presentation  | User interface and interaction.                                     | React.js, Angular, Mobile apps  |
+| ⚙️ Application   | Core business logic and request processing.                         | Java Spring Boot, .NET Core     |
+| 🔒 Authentication| Handles login, OAuth, token management.                            | Keycloak, AWS Cognito           |
+| ⚡ Caching Layer | Speeds up data retrieval and offloads the database.                 | Redis, Memcached                |
+| 🧠 AI/ML Layer   | Processes intelligent features like search ranking or recommendation engines. | TensorFlow Serving, PyTorch     |
+| 🗄️ Data Tier     | Manages persistent data and querying.                              | MySQL, MongoDB, DynamoDB        |
+
+---
+
+### 🧩 Example Architecture Flow
+Imagine a **social media app** like Twitter:
+1. User opens the app (Presentation Tier).
+2. App sends login request → handled by the **Authentication Tier**.
+3. Auth service validates token and passes request to Application Tier.
+4. Application Tier asks the **Caching Layer** first; if cache misses, queries the **Data Tier**.
+5. Application Tier might also send data to the **AI/ML Layer** for personalized feeds.
+6. Application Tier returns final result to the client.
+
+---
+
+## ✅ Advantages
+- **Scalability:** Scale each layer independently.
+- **Maintainability:** Easier to manage code, test and deploy one tier at a time.
+- **Flexibility:** Deploy new features by adding new tiers without touching existing ones.
+- **Resilience:** Fault isolation between tiers.
+
+---
+
+### ⚠️ Drawbacks
+- **Increased complexity** — Requires orchestration and careful design.
+- **More network hops** — Communication between tiers can introduce latency.
+
+---
+
+### 🧰 Example Tech Stack
+| Tier                  | Tech Examples                                      |
+|------------------------|--------------------------------------------------|
+| Presentation           | React.js, Vue.js                                 |
+| Application/Business   | Spring Boot, Node.js                             |
+| Caching Layer          | Redis                                            |
+| Authentication         | OAuth2 server, Keycloak                         |
+| AI/ML                  | Scikit-learn models exposed via REST             |
+| Data Tier              | MySQL, MongoDB, Elasticsearch                    |
+
+---
+
+💡 **In Summary**  
+Multi-tier architectures enable highly modular, scalable, and fault-tolerant distributed systems — they power most modern large-scale web and enterprise solutions.
+
+## 🌐 Example: Distributed Online Travel Platform
+
+Imagine an **online travel booking platform** that integrates different services across companies:
+
+### 🧩 Services across Boundaries
+- **Flight Service (3rd party airline API)**  
+- **Hotel Service (partner hotel reservation API)**  
+- **Payment Service (external payment processor)**  
+- **User Account Service (internal)**
+
+Each of these services:
+- Runs on different servers.
+- Uses different databases.
+- Exposes its own interface (e.g. REST, SOAP).
+
+---
+
+### 🧭 Service-Oriented Architecture
+The travel platform’s **Application Tier** orchestrates these distributed services:
+1. **User searches** for a trip → Application queries Flight Service + Hotel Service.
+2. Application **aggregates responses** to present options to the user.
+3. On booking, Application **initiates a distributed transaction**:
+   - Reserve flight.
+   - Reserve hotel.
+   - Charge credit card.
+
+---
+
+### 🏗️ Transaction Coordination
+With all these distributed components:
+- A traditional single DBMS can’t guarantee ACID transactions across services.
+- Instead, we need a **Transaction Coordinator**:
+  - E.g. using **Saga pattern** or **Two-Phase Commit**.
+  - Service-Oriented Infrastructure (e.g. a message broker like Kafka or a transaction manager) manages these distributed transactions.
+
+---
+
+### 🛠️ Infrastructure Requirements
+- **Service Discovery & Registry** — so the Application knows where each service is.
+- **Authentication & Authorization** — so each service trusts the other.
+- **Message Bus / Broker** — to coordinate updates and rollbacks in case of failure.
+- **Monitoring & Logging** — to trace service interactions across boundaries.
+
+---
+
+💡 **Key takeaway:**  
+In this distributed world, the DBMS is just one part of the architecture.  
+**Service-orientation** and **integration infrastructure** become the central focus.
+
+## 🧭 Infrastructure for Service Integration & Transactions
+
+When services span **different systems, companies, or networks**, simple direct calls between them are insufficient.  
+We need a dedicated **integration infrastructure** that provides:
+
+---
+
+### 🔄 Service Integration
+✅ **Service Discovery & Registry** — Know where and how to reach each service.  
+✅ **Communication Protocols** — REST, SOAP, gRPC, messaging queues to enable interoperability across heterogeneous systems.  
+✅ **Adapters & Gateways** — Handle different data formats, security requirements, or versions between services.
+
+---
+
+### 🧾 Transaction Context Support
+✅ **Transaction Coordination** — Implement protocols like **Two-Phase Commit (2PC)** or **Saga** to maintain consistency across distributed operations.  
+✅ **Compensation Logic** — In long-running transactions, provide rollback or compensating transactions if one service fails.  
+✅ **Idempotent Operations** — Ensure repeatable operations to recover gracefully after partial failures.
+
+---
+
+### 🛡️ Governance & Management
+✅ **Centralized Logging & Monitoring** — Correlate events and trace transactions across services.  
+✅ **Authentication & Authorization** — Ensure secure service-to-service communication.  
+✅ **Service-Level Agreements (SLAs)** — Manage performance, uptime, and versioning across service boundaries.
+
+---
+
+💡 **In short:**  
+Distributed, service-oriented architectures require a robust **integration infrastructure** to ensure that services across different boundaries work together reliably — especially when those interactions must participate in a unified **transactional context**.
+
+## 🎭 Hiding Everything Behind a Service Interface
+
+In modern distributed architectures, **every component is offered as a service**:
+> **XaaS (Everything-as-a-Service)**
+
+---
+
+### 🧑‍💻 Example: DaaS (Data-as-a-Service)
+- Users access data **as a simple service endpoint**.
+- Complexity like:
+  - **Distribution** across multiple servers
+  - **Replication** for fault tolerance
+  - **Geographic placement** for latency optimization  
+- …is **completely hidden** from the user.
+
+---
+
+### 🧠 What’s Happening Internally?
+- The service provider:
+  - Dynamically distributes data.
+  - Coordinates transactions across locations.
+  - Scales up or down as needed.
+- The **traditional DBMS role** becomes much less visible — it’s part of the provider's internal implementation.
+
+---
+
+### 💳 Service Provider Model
+- The user simply **“buys” data access on demand**.
+- Complete **control is delegated** to the provider:
+  - SLAs guarantee uptime and performance.
+  - Automatic backups, updates, and maintenance.
+
+---
+
+💡 **Key Insight:**  
+By hiding all complexity behind well-defined service interfaces, **users focus on consumption** while providers manage the intricate distributed systems under the hood.
+
+## 📜 The NoSQL Era → Towards NewSQL
+
+### 🏛️ Relational Databases
+- Introduced in the **late 1960s**.
+- Still the **dominant solution** for most data management tasks.
+
+---
+
+### 🌊 The Rise of NoSQL (Late 2000s)
+- Driven by the **“Big Data”** movement.
+- Key characteristics:
+  - **No fixed schema** → Greater flexibility
+  - **No traditional transactions** → Lightweight, easy to scale
+
+---
+
+### ⚠️ Trade-Offs of NoSQL
+While NoSQL systems offer scalability and schema flexibility, they come with drawbacks:
+- **No schema**:
+  - No **declarative queries** like SQL.
+  - No **automated query optimization**.
+- **No transactions**:
+  - No **ACID guarantees**.
+  - No **consistent execution semantics**.
+
+---
+
+### 🔄 The Emergence of NewSQL
+To bridge the gap:
+- **NewSQL databases** aim to combine:
+  - The **scalability** of NoSQL
+  - The **strong consistency and SQL capabilities** of traditional relational DBs
+
+---
+
+💡 **Summary**:  
+NewSQL solutions offer a way to scale relational databases for modern workloads without losing the power of SQL and ACID transactions.
+
+## 🧭 Examples of Relational, NoSQL, and NewSQL Databases
+
+| Category     | Examples                                | Key Features |
+|--------------|-----------------------------------------|--------------|
+| **Relational** | MySQL, PostgreSQL, Oracle, SQL Server  | ACID transactions, SQL queries, strict schema |
+| **NoSQL**      | MongoDB, Cassandra, DynamoDB, Redis    | Flexible schema, high scalability, eventual consistency |
+| **NewSQL**     | CockroachDB, Google Spanner, TiDB, YugabyteDB | SQL interface with strong consistency & horizontal scalability |
+
+---
+
+### 🔍 Summary
+✅ **Relational Databases:**  
+Great for complex queries and transactions, but can struggle with scale.
+
+✅ **NoSQL Databases:**  
+Scale easily and allow schema flexibility, but lack ACID transactions and SQL.
+
+✅ **NewSQL Databases:**  
+Offer the best of both worlds — SQL compatibility, transactions, and distributed scalability.
+
+## From Databases to Higher-Order Databases
+
+### Traditional Databases
+- Store and manage **data as flat, first-order values** (e.g., numbers, strings, records).
+- Operations primarily focus on CRUD (Create, Read, Update, Delete).
+- Query languages like SQL operate on **sets of tuples** or relational tables.
+
+---
+
+### What are Higher-Order Databases?
+
+Higher-Order Databases extend traditional concepts by allowing the storage and manipulation of **complex data types**, such as:
+
+- Functions as first-class citizens (storable, queryable, and executable).
+- Nested or hierarchical data structures (e.g., XML, JSON, graphs).
+- Data that can represent behaviors, workflows, or computations.
+
+---
+
+### Key Ideas
+- Higher-Order Databases treat data and operations more uniformly.
+- They allow **queries and transactions over not just data values, but also over functions and processes**.
+- Enable richer abstractions and more expressive query languages.
+
+---
+
+### Examples & Use Cases
+- **Object-Oriented Databases:** Store objects including methods (functions).
+- **Graph Databases:** Store entities and relationships, allowing complex traversal queries.
+- **Functional Databases:** Support querying and manipulating functions or behaviors stored as data.
+- **Document Stores:** Handle nested JSON/XML documents, often with flexible schemas.
+
+---
+
+### Why Higher-Order Databases?
+
+- They enable:
+  - More natural modeling of complex domains.
+  - Integration of code and data for dynamic, adaptable systems.
+  - Advanced analytics and reasoning on data with embedded behaviors.
+
+---
+
+**Summary:**  
+Higher-Order Databases represent a shift from static, flat data storage towards dynamic, richly structured, and behavior-aware data management.
+
+![alt text](image-65.png)
+
+
+
