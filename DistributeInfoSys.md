@@ -2838,4 +2838,114 @@ Document Store:
 **⚠️ Important:**  
 Each document database usually has its **own proprietary query language or API**, tailored to its document format (e.g. MongoDB’s query operators for JSON, or XQuery for XML).
 
+## 📂 Document Databases: Applications
 
+**Sample use cases for document store databases include:**
+
+✅ **Text Documents**  
+→ Store and efficiently search large collections of text.
+
+✅ **Metadata Management**  
+→ Maintain rich, structured metadata for diverse data types (images, videos, files, etc.).
+
+✅ **Interoperability**  
+→ Exchange structured data between heterogeneous systems (e.g. JSON/XML payloads for APIs or integration).
+
+✅ **Product Catalogs & Content Management**  
+→ Manage product details, articles, blogs, or any other hierarchical data that fits a nested structure.
+
+---
+
+**💡 Why Document Databases?**  
+→ Flexible schema and powerful querying make them ideal for semi-structured data and rapid iteration.
+
+## 🌐 Graph Databases
+
+Graphs are well-suited for **networked information**:
+
+- Applications that deal with highly **connected data** require specialized queries, such as:
+  - 🧭 Finding **transitive dependencies** (e.g. friends-of-friends in a social network)
+  - 🔗 Determining whether two nodes are **connected**
+  - 📍 Finding the **shortest path** between nodes (e.g. routes in a navigation system)
+
+---
+
+**Why Graph Databases?**
+- Relational databases provide only **limited support** for these types of queries.
+- Graph databases **natively store graphs** and offer efficient query support for traversals and pathfinding.
+- Popular graph databases: **Neo4j**, **Amazon Neptune**, **ArangoDB**.
+
+## 🔍 Examples of Graph Algorithms
+
+### 1. Cycle Detection (Directed Graphs)
+- Find a path that starts and ends at the **same node**, forming a cycle.
+
+---
+
+### 2. Eulerian Path
+- Traverse the graph so that **each edge is visited exactly once**.
+- The **start and end nodes can be different**.
+
+---
+
+### 3. Eulerian Cycle
+- Traverse the graph so that **each edge is visited exactly once**.
+- The **start and end nodes are the same** (forms a cycle).
+
+---
+
+### 4. Hamiltonian Path
+- Visit **each node exactly once**.
+- Not all edges need to be traversed.
+
+## 🔗 Graph Data Structure: Edge List
+
+### 🧠 Definition
+- Graph = (V, E), where:
+  - **V** = set of nodes
+  - **E** = set of edges
+    - **Undirected graph** → E is a set of sets: `{ {v_i, v_j}, ... }`
+    - **Directed graph** → E is a set of tuples: `{ (v_i, v_j), ... }`
+    - **Multigraph** → E is a multiset of sets/tuples (allows parallel edges)
+
+---
+
+### ✅ Advantages
+- **Easy insertions/deletions** of nodes and edges
+- **Straightforward queries** like listing all nodes or all edges
+
+---
+
+### ⚠️ Disadvantages
+- Poor support for **complex queries**:
+  - Finding specific nodes or edges efficiently
+  - Determining paths or performing traversal
+### Graph Data Structure: Adjacency Matrix
+![alt text](image-72.png)
+### Graph Data Structure: Incidence Matrix
+![alt text](image-73.png)
+### Graph Data Structure: Adjacency List
+![alt text](image-74.png)
+### Graph Data Structure: Incidence List
+![alt text](image-75.png)
+
+## 🏷️ (Labeled) Property Graph Model
+
+### 📌 Characteristics
+- **Directed multigraphs**: Most graph databases allow multiple edges between nodes.
+- **Labels and types**:
+  - Both nodes and edges have **labels** that indicate their types.
+  - Each type defines a **schema** — a set of attributes.
+
+---
+
+### 🧩 Properties
+Each **attribute** in a node or edge:
+- Has a **name**.
+- Has a **value** (from some domain).
+- Is represented as a **name:value** pair.
+
+---
+
+### 🎯 Why "Property Graph"?
+- Since nodes and edges can hold **arbitrary properties** (`name:value` pairs), we call them **Property Graphs**.
