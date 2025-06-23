@@ -2949,3 +2949,106 @@ Each **attribute** in a node or edge:
 
 ### 🎯 Why "Property Graph"?
 - Since nodes and edges can hold **arbitrary properties** (`name:value` pairs), we call them **Property Graphs**.
+
+### ... (Labeled) Property Graph Model ...
+![alt text](image-76.png)
+
+### Advanced Graph Models
+![alt text](image-77.png)
+
+### ... (Labeled) Property Graph Model
+![alt text](image-78.png)
+
+### Graph Databases in Practice: Neo4J
+![alt text](image-79.png)
+### Graph Databases: Applications
+![alt text](image-80.png)
+### Resource Description Framework (RDF)
+![alt text](image-81.png)
+![alt text](image-82.png)
+### Triple Stores Databases
+![alt text](image-83.png)
+## In-Memory Databases
+![alt text](image-84.png)
+![alt text](image-85.png)
+## Polystores ...
+![alt text](image-86.png)
+![alt text](image-87.png)
+![alt text](image-88.png)
+### 📝 Writes-Follow-Reads Consistency
+- If a **transaction** performs a write on object `x` after reading `x`,  
+- The write is guaranteed to take place on the **same version or a more recent version** of `x` that was read.
+- ✅ Prevents overwriting newer updates accidentally with stale data.
+### Problem: Polystores are typically read-only
+![alt text](image-89.png)
+### PolyDBMS: Overview
+![alt text](image-90.png)
+### Problem: Independence of Storage Configuration
+![alt text](image-91.png)
+![alt text](image-92.png)
+### PolyDBMS: Namespaces
+![alt text](image-93.png)
+![alt text](image-94.png)
+### Implementation of a PolyDBMS: Polypheny
+![alt text](image-95.png)
+## Data Management in the Cloud
+![alt text](image-96.png)
+### The Cloud from a Provider’s Perspective
+![alt text](image-97.png)
+### Different Levels of Consistency ...
+![alt text](image-98.png)
+### Cloud Data Management – Requirements
+![alt text](image-99.png)
+### CAP Theorem ...
+![alt text](image-100.png)
+![alt text](image-101.png)
+![alt text](image-102.png)
+![alt text](image-103.png)
+![alt text](image-104.png)
+### CAP Theorem: Examples ...
+![alt text](image-105.png)
+![alt text](image-106.png)
+![alt text](image-107.png)
+### Different Flavors of (Strong) Consistency
+![alt text](image-108.png)
+![alt text](image-109.png)
+### Eventual Consistency ...
+![alt text](image-110.png)
+### ACID vs. BASE
+![alt text](image-111.png)
+![alt text](image-112.png)
+### CAP in the Non-Failure Case: PACELC
+![alt text](image-113.png)
+
+### 🔄 CAP in the Non-Failure Case: **PACELC**
+
+The **PACELC theorem** extends the traditional **CAP theorem** by also considering the trade-off between **latency (L)** and **consistency (C)** during **normal operation** (no network partition).
+
+**PACELC** states that:
+- **P**: In the event of a **partition** (CAP case):
+  - You must choose between **Availability (A)** and **Consistency (C)** — just like the CAP theorem.
+
+- **ELC**: Else (when the system is operating normally, i.e. **no partition**):
+  - You must choose between **Latency (L)** and **Consistency (C)** — most distributed systems either:
+    - Prioritize **low latency** by relaxing consistency.
+    - Or maintain **strong consistency** at the cost of **higher latency**.
+
+---
+
+#### 🎯 Summary
+- **PACELC** = `If Partition (P) then (A or C), Else (L or C)`.
+- It highlights that **even without failures**, distributed systems face a fundamental trade-off between:
+  - **Responsiveness** (low latency), and
+  - **Data correctness** (consistency).
+
+---
+
+#### 🧠 Example:
+- Systems like **Cassandra** and **DynamoDB** favor **availability and low latency** (`PA/EL`).
+- Systems like **Spanner** favor **consistency** even without partitions (`PC/EC`), using synchronized clocks and stricter coordination.
+
+
+### 🔄 Session Consistency
+- Provides **Read-Your-Write consistency** but **scoped to the lifetime of a client session**.
+- ✅ Within a single session, a client will always see its own writes reflected in subsequent reads.
+- ⚠️ Across different sessions or clients, this guarantee does not necessarily hold.
