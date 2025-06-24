@@ -239,3 +239,19 @@ Concrete values of `N`, `W`, and `R` depend on which property you want to optimi
 - Provides **Read-Your-Write consistency** but **scoped to the lifetime of a client session**.
 - ✅ Within a single session, a client will always see its own writes reflected in subsequent reads.
 - ⚠️ Across different sessions or clients, this guarantee does not necessarily hold.
+### GFS achieves consistency
+GFS achieves consistency through lazy replication and an append-only design: the master designates a primary **chunkserver to serialize all writes**, especially appends, while clients send data in parallel to all replicas. **The primary dictates the order of updates and forwards them to secondaries**, ensuring all replicas apply changes identically. Locks at the master prevent concurrent conflicting writes, and the decoupled data transfer and ordering allow high throughput and fault tolerance across commodity hardware.
+
+The client must ask the master for the chunk server addresses because the master holds the metadata mapping files to chunks and chunks to their current replica locations. By querying the master first, the client learns which chunk servers store the data it needs, allowing the client to read or write data directly to those servers. This avoids bottlenecking the master with file content and lets the master focus solely on lightweight metadata management, making the system much more scalable.
+
+- **Append targets a specific chunk:**  
+  Files in GFS are divided into fixed-size chunks (typically 64 MB). An append operation adds data only to the current active chunk that has space.
+
+- **Not all chunks are modified:**  
+  Other chunks of the same file remain unchanged during an append; only the chunk receiving the new data is updated.
+
+- **Data sent to all replicas of that chunk:**  
+  To maintain consistency and fault tolerance, the client sends the appended data to all replicas of the target chunk simultaneously.
+
+- **Chunk rollover:**  
+  When the current chunk is full, new data is appended to the next chunk in the file sequence.
