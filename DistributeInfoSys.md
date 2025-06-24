@@ -3052,3 +3052,223 @@ The **PACELC theorem** extends the traditional **CAP theorem** by also consideri
 - Provides **Read-Your-Write consistency** but **scoped to the lifetime of a client session**.
 - ✅ Within a single session, a client will always see its own writes reflected in subsequent reads.
 - ⚠️ Across different sessions or clients, this guarantee does not necessarily hold.
+
+# Chapter 4: Distributed Data Infrastructures and Event-Driven Architectures
+## What is Big Data?
+![alt text](image-114.png)
+
+## Distributed File Systems in Cloud Environments
+
+In most cases, modern **Cloud infrastructures** feature **dedicated distributed file systems** that cater to the particularities of the Cloud:
+
+- **Commodity hardware**:
+  - Large-scale clusters composed of inexpensive, failure-prone machines.
+  - Tens, hundreds, or even thousands of servers working together.
+
+- **Robustness against hardware failures**:
+  - The file system must tolerate node crashes, disk failures, and network issues.
+  - Redundancy, replication, and fault tolerance are built into the design.
+
+---
+
+### Workload Characteristics
+
+**Cloud file systems** are designed around the typical workloads seen in Cloud applications, which often involve:
+
+#### 📖 Read Patterns
+1. **Large streaming reads**:
+   - Reads in the order of **hundreds of KB to several MB**.
+   - Sequential access patterns to large data sets (e.g. log processing, data analytics).
+2. **Small random reads**:
+   - Scattered reads from different parts of large files.
+   - Requires efficient read-path optimization for low-latency data access.
+
+---
+
+#### ✏️ Write Patterns
+**Mutation is mostly achieved via appending**, not overwriting:
+- Files are often treated as **immutable** after they are written.
+- New data is appended to existing files — e.g. log files, event streams.
+- Avoiding in-place updates simplifies consistency and scalability.
+
+---
+
+### 🔑 Design Consequences
+
+Given the read/write patterns above, Cloud file systems have to address several key points:
+
+#### ✅ Atomicity for Concurrent Appends
+- **Multiple clients appending to the same file concurrently**.
+- Requires **atomicity guarantees** with minimal synchronization.
+- Distributed coordination is lightweight to maintain scalability.
+
+#### 📁 Fewer, Larger Files
+- Optimize for a **modest number of very large files**.
+- Avoid the overhead of managing millions of small files.
+- Metadata management is simpler and more efficient at scale.
+
+#### ⚡ Sustained Bandwidth over Low Latency
+- Prioritize **high sustained bandwidth** (MB/s, GB/s) for large data scans.
+- Low-latency operations on small files is less of a design priority.
+
+---
+
+### 🧠 Summary
+A **distributed file system** for Cloud infrastructures must:
+- Be **robust** and **fault-tolerant**.
+- Handle **streaming and random read patterns** efficiently.
+- Support **highly concurrent appends**.
+- Focus on **throughput over per-operation latency**.
+- Manage **large files efficiently**.
+
+Examples of such file systems include:
+- Google File System (GFS)
+- Hadoop Distributed File System (HDFS)
+- Amazon S3 (object storage, often treated as a distributed file store)
+
+---
+
+**References**:
+- Ghemawat et al. (2003). *The Google File System*.
+- Shvachko et al. (2010). *The Hadoop Distributed File System*.
+
+## 🗄️ Google File System (GFS)
+
+**Google File System (GFS)** is a distributed file system designed for Cloud data management.  
+It is highly **scalable**, **fault-tolerant**, and optimized for large-scale data processing workloads.
+
+> 💡 The **Hadoop Distributed File System (HDFS)** is an **open-source implementation** that follows the design principles of GFS.
+
+---
+
+### 📜 Operations in GFS
+
+In addition to the standard file operations:
+- `Create`, `Delete`, `Open`, `Close`, `Read`, `Write`
+
+**GFS introduces two additional operations:**
+
+| Operation          | Description                                                                 |
+|--------------------|-----------------------------------------------------------------------------|
+| `Snapshot`          | Creates a **copy (replica)** of a file or an entire directory tree efficiently at the file-system level (useful for backups and versioning). |
+| `Record Append`     | Allows **multiple clients to append to the same file concurrently** with a guarantee of **atomicity** and **consistency**. Clients never see partial data. |
+---
+![alt text](image-116.png)
+### 🧠 GFS Architecture
+
+### 🖥️ Cluster Roles
+A GFS cluster consists of:
+- **Single Master Server**:
+  - Manages all **metadata**.
+  - Controls chunk placement, replication, garbage collection.
+- **Multiple Chunk Servers**:
+  - Store file data as fixed-size chunks.
+  - Serve client read and write requests directly.
+
+---
+
+### 🧩 Chunks
+- **File subdivision**:
+  - Files are divided into **fixed-size chunks** (typically `64 MB` each).
+  - Each chunk is assigned a **unique 64-bit ID**.
+- **Storage**:
+  - Chunks are stored as **regular Linux files** on local disks of the chunk servers.
+- **Replication**:
+  - Every chunk is **triplicated** across different servers for **fault-tolerance** and **availability**.
+  - Replication and chunk placement are **controlled by the master**.
+
+---
+
+### 📝 Master Server Responsibilities
+- Maintains all **metadata**:
+  - Namespace (directory structure), file-to-chunk mappings.
+  - Locations of chunk replicas across servers.
+- **Heartbeat mechanism**:
+  - Master periodically sends **heartbeats** to chunk servers.
+  - Receives status reports to detect failed or missing chunks.
+  - Initiates **re-replication** if any replica is lost.
+- **Scalability**:
+  - Clients do **not send file data through the master**.
+  - Clients directly contact chunk servers for reading/writing.
+
+---
+
+## 🔄 Client Interaction
+1. The client sends a request to the master to obtain the **chunk locations**.
+2. The master returns a list of chunk servers holding the chunk.
+3. The client **communicates directly with chunk servers** to read or append data.
+4. The master stays out of the data path — this improves **scalability** and **throughput**.
+
+---
+
+### ✅ Summary of Design Goals
+- **Fault tolerance** across commodity hardware.
+- **High throughput** over low-latency operations.
+- Efficient for workloads consisting of:
+  - Large streaming reads.
+  - Appends to existing files.
+  - Massive files.
+- Designed to support **concurrent appends** with minimal synchronization.
+
+---
+
+### 📂 Related Systems
+- **HDFS** (Hadoop Distributed File System) — An open-source implementation inspired by GFS.
+- **Amazon S3** — Distributed object store (not exactly a file system but also targets Cloud data workloads).
+
+---
+
+💡 **References**:
+- Ghemawat et al. (2003), *The Google File System*, SOSP.
+- Shvachko et al. (2010), *The Hadoop Distributed File System*, MASSIVE DATA PAPER.
+
+### GFS: Consistency ...
+![alt text](image-117.png)
+![alt text](image-118.png)
+![alt text](image-119.png)
+
+## Databases in the Cloud: Google Spanner
+![alt text](image-120.png)
+![alt text](image-121.png)
+![alt text](image-122.png)
+
+### 🧠 Paxos Group
+A **Paxos group** is a set of servers (often called **replicas**) that collectively run the Paxos protocol to agree on a single value (e.g. a log entry, a write, a tablet state).  
+- The group usually contains an odd number of nodes (e.g. 3 or 5) so that a **majority** can always make progress.
+- Every decision requires a **majority of the group** to acknowledge a proposal.
+
+---
+
+### 🧠 Paxos Leader
+The **Paxos leader** is a designated node that **coordinates** the consensus process.  
+- The leader **proposes new values** to the group.
+- It simplifies reaching agreement because other nodes just accept the leader’s proposals.
+- The leader can change if it crashes or becomes unreachable — typically through a **leader election** process.
+- Many systems implement **long-lived leaders** to reduce the overhead of re-electing them frequently.
+
+---
+
+### 🧠 Paxos
+**Paxos** is a **distributed consensus algorithm** that allows a collection of unreliable servers to agree on a single value, even in the face of:
+- Message delays
+- Server crashes
+- Network partitions
+
+**Key steps in Paxos**:
+1. **Prepare phase** — the leader proposes a ballot number and asks other replicas to promise not to accept lower-numbered proposals.
+2. **Accept phase** — if a majority promise, the leader sends the value to accept.
+3. Once a **majority accepts** the value, it is chosen and cannot change.
+
+**Goal of Paxos**:
+- Ensure **safety**: No two different values can ever be decided.
+- Ensure **liveness**: Eventually some value will be chosen if a majority of nodes are up.
+
+---
+
+### 🔄 Summary
+| Concept      | Meaning                                                |
+|--------------|--------------------------------------------------------|
+| Paxos Group  | A set of replicas that participate in reaching consensus. |
+| Paxos Leader | The elected replica that drives the consensus rounds.  |
+| Paxos        | The algorithm that enables consensus despite failures. |
+
