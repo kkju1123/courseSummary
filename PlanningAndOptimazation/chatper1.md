@@ -54,3 +54,5 @@ This note explains the difference between **logical consequence** (semantic enta
 - **Logical equivalence:** like saying *“It’s raining (\(\varphi\)) if and only if water is falling from the sky (\(\psi\)).”*
 
 ---
+
+## 
